@@ -1,0 +1,38 @@
+<header class="container d-flex align-items-center justify-content-between">
+  <button
+    class="btn hamburger_button p-0"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasRight"
+    aria-controls="offcanvasRight"
+  >
+    <span class="material-symbols-outlined material-icons md-48"> menu </span>
+  </button>
+  <img src="/images/logo.png" alt="" class="logo" />
+</header>
+
+<div
+  class="offcanvas offcanvas-start"
+  tabindex="-1"
+  id="offcanvasRight"
+  aria-labelledby="offcanvasRightLabel"
+>
+  <div class="offcanvas-header">
+    <h5 id="offcanvasRightLabel">Menu</h5>
+    <button
+      type="button"
+      class="btn-close text-reset"
+      data-bs-dismiss="offcanvas"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="offcanvas-body">
+    <nav>
+      <li><a href="/">Dashboard</a></li>
+      <li><a href="/weekly_products">Weekly Product Sales</a></li>
+      <li><a href="">Sales History</a></li>
+      <li><a href="">Consumer Ledger</a></li>
+      <li><a href="">Logout</a></li>
+    </nav>
+  </div>
+</div>

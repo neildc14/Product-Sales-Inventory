@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var Schema = mongoose.Schema();
+var Schema = mongoose.Schema;
 
 const MiscellaneousSchema = new Schema({
   misc_name: String,

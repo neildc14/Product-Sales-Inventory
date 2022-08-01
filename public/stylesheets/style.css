@@ -6,6 +6,11 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+:root {
+  --emperor: #555353;
+  --pale-leaf: #c3d9bf;
+}
+
 li {
   margin-bottom: 1rem;
   list-style-type: none;
@@ -16,6 +21,10 @@ a {
   text-decoration: none !important;
 }
 
+header {
+  border-bottom: 1px solid var(--pale-leaf);
+}
+
 .material-icons {
   font-size: 3rem !important;
 }
@@ -24,4 +33,55 @@ a {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;
+}
+
+.logo {
+  height: 90px;
+  width: 120px !important;
+}
+
+.add_btn {
+  margin-left: auto !important;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.add_icon {
+  margin-left: 1rem;
+  color: white;
+  background-color: #1d63dc;
+  border-radius: 100%;
+}
+
+.add_icon:hover {
+  font-size: 3.3rem !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.dashboard_nav {
+  margin-top: 3rem;
+  gap: 2rem;
+}
+.dashboard_list {
+  margin-bottom: 1rem;
+}
+
+.dashboard_list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 3rem;
+  width: 100% !important;
+  max-width: 350px;
+  margin: 0 auto;
+  border-radius: 4px;
+  background: linear-gradient(to bottom, #2f7ae5, #3e88ef);
+  font-size: 1.2rem;
+  text-align: center;
+  color: white;
+}
+
+.dashboard_list a:hover {
+  color: white;
+  background: linear-gradient(to bottom, #5e9ffa, #4686e0);
 }
