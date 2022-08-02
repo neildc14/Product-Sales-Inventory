@@ -1,5 +1,7 @@
 var { validationResult, body } = require("express-validator");
 var WeeklyProducts = require("../models/WeeklyProducts");
+var Product = require("../models/Product");
+var async = require("async");
 
 exports.add_weekly_product_sales_get = function (req, res, next) {
   res.render("add_weekly_products_sales", {
@@ -30,24 +32,33 @@ exports.add_weekly_product_sales_post = [
         if (err) {
           return next(err);
         }
-        console.log(weekly_products_selling.url, "-----");
+
         res.redirect("/weekly_products");
       });
     }
   },
 ];
 
-//weekly products
 exports.weekly_products = function (req, res, next) {
   WeeklyProducts.find()
     .sort({ createdAt: "desc" })
     .limit(1)
-    .exec((err, weekly_products) => {
-      if (err) return next(err);
-      res.render("weekly_product_sales", {
-        title: weekly_products[0].date_start_formatted,
-        weekly_products: weekly_products[0],
-        errors: null,
-      });
+    .exec(function (err, results) {
+      if (err) {
+        return next(err);
+      }
+      Product.find({ weekly_product: results[0]._id })
+        .sort({ product_name: "asc" })
+        .exec(function (err, product) {
+          if (err) {
+            return next(err);
+          }
+          res.render("weekly_product_sales", {
+            title: "Weekly Sales",
+            weekly_product_sales: results[0],
+            products: product,
+            errors: null,
+          });
+        });
     });
 };

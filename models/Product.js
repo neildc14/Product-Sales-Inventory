@@ -4,6 +4,10 @@ var { DateTime } = require("luxon");
 
 const ProductSchema = new Schema(
   {
+    weekly_product: {
+      type: Schema.Types.ObjectId,
+      ref: "WeeklyProducts",
+    },
     product_name: String,
     quantity: Number,
     original_price: Number,
@@ -14,11 +18,11 @@ const ProductSchema = new Schema(
 );
 
 ProductSchema.virtual("url").get(function () {
-  return "/product" + this._id;
+  return "/weekly_products/" + this._id;
 });
 
 ProductSchema.virtual("date_formatted").get(function () {
-  return DateTime.fromJSDate(this.date).toLocalString(DateTime.DATE_MED);
+  return DateTime.fromJSDate(this.date).toLocaleString(DateTime.DATE_MED);
 });
 
 module.exports = mongoose.model("Product", ProductSchema);

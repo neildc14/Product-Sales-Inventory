@@ -9,24 +9,55 @@
           <div class="border border-2">
             <h6 class="d-flex align-items-center m-0 p-2">
               <span class="pe-2">Week:</span>
-              <%=weekly_products.date_start_formatted%>-<%=weekly_products.date_end_formatted
+              <%=weekly_product_sales.date_start_formatted%>-<%=weekly_product_sales.date_end_formatted
               %>
             </h6>
           </div>
           <div class="my-4">
             <a
-              href="/weekly_products/add-product"
               class="btn btn-sm btn-primary"
               data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
+              data-bs-target="#productModal"
               >Add Product</a
             >
             <hr />
           </div>
-          <!-- Modal -->
+          <section class="products_container">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <%products.forEach((product)=>{ %>
+              <tbody>
+                <tr>
+                  <td><%=product.product_name%></td>
+                  <td style="width: 35%">
+                    <a href="<%=product.url%>" class="btn btn-sm btn-success"
+                      >View Product</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+
+              <%})%>
+            </table>
+          </section>
+          <div class="my-4">
+            <a
+              class="btn btn-sm btn-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#expensesModal"
+              >Add Expenses</a
+            >
+            <hr />
+          </div>
+          <!-- ProductModal -->
           <div
             class="modal fade"
-            id="exampleModal"
+            id="productModal"
             tabindex="-1"
             aria-labelledby="exampleModalLabel"
             aria-hidden="true"
@@ -46,6 +77,14 @@
                 </div>
                 <form action="/weekly_products" method="POST">
                   <div class="modal-body">
+                    <div class="form-group pb-2">
+                      <input
+                        type="hidden"
+                        name="weekly_product"
+                        id="weekly_product"
+                        value="<%=weekly_product_sales._id%>"
+                      />
+                    </div>
                     <div class="form-group pb-2">
                       <label for="product_name" class="pb-1"
                         >Product Name:</label
@@ -88,6 +127,70 @@
                         class="form-control"
                         name="selling_price"
                         id="selling_price"
+                        required="true"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="reset" class="btn">Reset</button>
+                    <button type="submit" class="btn btn-primary">
+                      Save Product
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="modal fade"
+            id="expensesModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Add Expenses
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <form action="/weekly_products" method="POST">
+                  <div class="modal-body">
+                    <div class="form-group pb-2">
+                      <input
+                        type="hidden"
+                        name="weekly_product"
+                        id="weekly_product"
+                        value="<%=weekly_product_sales._id%>"
+                      />
+                    </div>
+                    <div class="form-group pb-2">
+                      <label for="misc_name" class="pb-1">Type:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="misc_name"
+                        id="misc_name"
+                        required="true"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="form-group pb-2">
+                      <label for="amount" class="pb-1">Amount:</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="amount"
+                        id="amount"
                         required="true"
                         autocomplete="off"
                       />

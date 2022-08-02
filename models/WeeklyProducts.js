@@ -4,10 +4,6 @@ var { DateTime } = require("luxon");
 
 const WeeklyProductsSchema = new Schema(
   {
-    weekly_product: [{ type: Schema.Types.ObjectId, ref: "Product" }],
-    weekly_misc_expenses: [
-      { type: Schema.Types.ObjectId, ref: "Miscellaneous" },
-    ],
     date_start: { type: Date, default: Date.now },
     date_end: Date,
   },
