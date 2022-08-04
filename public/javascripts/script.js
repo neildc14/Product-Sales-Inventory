@@ -14,3 +14,12 @@ function navStickTopWhenScroll() {
 }
 
 navStickTopWhenScroll();
+
+const totalPurchased = document.getElementById("total_purchased");
+const sellingPrice = document.getElementById("product_selling_price_ref");
+const quantityOrdered = document.getElementById("quantity_ordered");
+
+function totalPurchasedValue() {
+  totalPurchased.value =
+    Number(sellingPrice.value) * Number(quantityOrdered.value);
+}

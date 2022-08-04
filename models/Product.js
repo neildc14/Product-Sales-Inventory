@@ -25,4 +25,12 @@ ProductSchema.virtual("date_formatted").get(function () {
   return DateTime.fromJSDate(this.date).toLocaleString(DateTime.DATE_MED);
 });
 
+ProductSchema.virtual("original_price_formatted").get(function () {
+  return `₱${this.original_price}.00`;
+});
+
+ProductSchema.virtual("selling_price_formatted").get(function () {
+  return `₱${this.selling_price}.00`;
+});
+
 module.exports = mongoose.model("Product", ProductSchema);

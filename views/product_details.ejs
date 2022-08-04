@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('./partials/head')%>
+  <body>
+    <main>
+      <div class="container-fluid mx-0 px-0">
+        <%-include('./partials/nav')%>
+        <div class="container mt-5">
+          <h5 class="bg-primary text-white p-1">
+            <span>Product: </span><%=product.product_name%>
+          </h5>
+
+          <section>
+            <table class="table border">
+              <tbody>
+                <tr>
+                  <th scope="row">Quantity</th>
+                  <td><%=product.quantity%></td>
+                </tr>
+                <tr>
+                  <th scope="row">Original Price</th>
+                  <td><%=product.original_price_formatted%></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="table-active">Selling Price</th>
+                  <td class="table-active">
+                    <%=product.selling_price_formatted%>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="my-4">
+            <h5 class="bg-secondary text-white p-1">Customers</h5>
+            <!-- Button trigger modal -->
+            <button
+              type="button"
+              class="btn btn-primary btn-sm"
+              data-bs-toggle="modal"
+              data-bs-target="#customerModal"
+            >
+              Add Customer
+            </button>
+            <hr />
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <%customers.forEach((customer)=> {%>
+                <tr>
+                  <td><%=customer.customer_name%></td>
+                  <td style="width: 38%">
+                    <a href="<%=customer.url%>" class="btn btn-sm btn-success"
+                      >View Customer</a
+                    >
+                  </td>
+                  <td style="width: 1%" class="px-0">
+                    <form action="">
+                      <input type="hidden" name="" />
+                      <button
+                        type="submit"
+                        class="btn m-0 p-0 btn-sm d-flex align-items-center"
+                      >
+                        <span class="material-symbols-outlined"> delete </span>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+                <%})%>
+              </tbody>
+            </table>
+
+            <!-- Modal -->
+            <div
+              class="modal fade"
+              id="customerModal"
+              tabindex="-1"
+              aria-labelledby="customerModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="customerModalLabel">
+                      Add Customer
+                    </h5>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <form
+                    action=""
+                    method="POST"
+                    onsubmit="totalPurchasedValue()"
+                  >
+                    <div class="modal-body">
+                      <div class="form-group pb-2">
+                        <input
+                          type="hidden"
+                          name="product_ordered"
+                          id="product_ordered"
+                          value="<%=product._id%>"
+                        />
+                      </div>
+                      <div class="form-group pb-2">
+                        <label for="customer_name" class="pb-1"
+                          >Customer Name:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="customer_name"
+                          id="customer_name"
+                          required="true"
+                          autocomplete="off"
+                        />
+                      </div>
+                      <div class="form-group pb-2">
+                        <label for="address" class="pb-1">Address:</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="address"
+                          id="address"
+                          required="true"
+                          autocomplete="off"
+                        />
+                      </div>
+                      <div class="form-group pb-2">
+                        <label for="quantity_ordered" class="pb-1"
+                          >Quanity Ordered:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          name="quantity_ordered"
+                          id="quantity_ordered"
+                          required="true"
+                          autocomplete="off"
+                        />
+                      </div>
+                      <div class="form-group pb-2">
+                        <input
+                          type="hidden"
+                          name="total_purchased"
+                          id="total_purchased"
+                          value=""
+                        />
+                        <input
+                          type="hidden"
+                          name=""
+                          id="product_selling_price_ref"
+                          value="<%=product.selling_price%>"
+                        />
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="reset" class="btn">Reset</button>
+                      <button type="submit" class="btn btn-primary">
+                        Save Customer
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <%-include('./partials/scripts')%>
+  </body>
+</html>

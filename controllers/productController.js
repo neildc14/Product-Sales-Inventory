@@ -1,5 +1,7 @@
 var { validationResult, body } = require("express-validator");
 var Product = require("../models/Product");
+var Customer = require("../models/Customer");
+var async = require("async");
 
 exports.index_get = function (req, res, next) {
   res.render("index", {
@@ -41,3 +43,25 @@ exports.add_product_post = [
     }
   },
 ];
+
+exports.product_details = function (req, res, next) {
+  Product.findById(req.params.id).exec(function (err, product) {
+    if (err) {
+      return next(err);
+    }
+    Customer.find({ product_ordered: product._id })
+      .sort({ customer_name: "asc" })
+      .exec(function (err, customers) {
+        if (err) {
+          return next(err);
+        }
+        console.log(customers);
+        res.render("product_details", {
+          title: "Product Details",
+          product: product,
+          customers: customers,
+          errors: null,
+        });
+      });
+  });
+};
