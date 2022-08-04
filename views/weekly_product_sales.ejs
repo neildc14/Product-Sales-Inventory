@@ -3,9 +3,23 @@
   <%-include('./partials/head')%>
   <body>
     <main>
-      <div class="container-fluid mx-0 px-0">
+      <div class="weekly_product_sales_container container-fluid mx-0 px-0">
         <%-include('./partials/nav')%>
         <div class="container mt-5">
+          <nav class="top_nav d-flex bg-gradient" id="weekly_product_top_nav">
+            <li class="my-0 text-white d-flex align-items-center">
+              <a href="#products_container" class="text-white">Products</a>
+              <span class="ms-1"> |</span>
+            </li>
+            <li class="my-0 ms-4 text-white d-flex align-items-center">
+              <a href="#expenses_container" class="text-white">Expenses</a>
+              <span class="ms-1"> |</span>
+            </li>
+            <li class="my-0 ms-4 text-white d-flex align-items-center">
+              <a href="#audit_container" class="text-white">Audit</a>
+              <span class="ms-1"> |</span>
+            </li>
+          </nav>
           <div class="border border-2">
             <h6 class="d-flex align-items-center m-0 p-2">
               <span class="pe-2">Week:</span>
@@ -15,23 +29,32 @@
           </div>
           <div class="my-4">
             <a
-              class="btn btn-sm btn-primary"
+              href="/weekly_products/add_product"
+              class="btn btn-sm btn-secondary"
               data-bs-toggle="modal"
               data-bs-target="#productModal"
               >Add Product</a
             >
+            <a
+              href="/weekly_products/add_expenses"
+              class="btn btn-sm btn-secondary ms-2"
+              >Add Expenses</a
+            >
             <hr />
           </div>
-          <section class="products_container">
-            <table class="table table-hover">
+          <h5 class="bg-primary text-white p-1">Products</h5>
+          <section class="products_container" id="products_container">
+            <table class="table table-striped">
               <thead>
                 <tr>
                   <th scope="col">Product</th>
                   <th scope="col"></th>
+                  <th scope="col"></th>
                 </tr>
               </thead>
-              <%products.forEach((product)=>{ %>
               <tbody>
+                <%products.forEach((product)=>{ %>
+
                 <tr>
                   <td><%=product.product_name%></td>
                   <td style="width: 35%">
@@ -39,20 +62,49 @@
                       >View Product</a
                     >
                   </td>
+                  <td style="width: 1%" class="px-0">
+                    <form action="">
+                      <input type="hidden" name="" />
+                      <button
+                        type="submit"
+                        class="btn m-0 p-0 btn-sm d-flex align-items-center"
+                      >
+                        <span class="material-symbols-outlined"> delete </span>
+                      </button>
+                    </form>
+                  </td>
                 </tr>
-              </tbody>
 
-              <%})%>
+                <%})%>
+              </tbody>
             </table>
           </section>
           <div class="my-4">
-            <a
-              class="btn btn-sm btn-primary"
-              data-bs-toggle="modal"
-              data-bs-target="#expensesModal"
-              >Add Expenses</a
-            >
-            <hr />
+            <h5 class="bg-primary text-white p-1">Expenses</h5>
+            <section class="products_container" id="expenses_container">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%miscellaneous.forEach((misc)=>{ %>
+
+                  <tr>
+                    <td><%=misc.misc_name%></td>
+                    <td style="width: 35%"><%=misc.amount%></td>
+                  </tr>
+
+                  <%})%>
+                </tbody>
+              </table>
+            </section>
+          </div>
+          <div class="my-4">
+            <h5 class="bg-dark text-white p-1">Audit</h5>
+            <section id="audit_container"></section>
           </div>
           <!-- ProductModal -->
           <div
@@ -75,7 +127,7 @@
                     aria-label="Close"
                   ></button>
                 </div>
-                <form action="/weekly_products" method="POST">
+                <form action="" method="POST">
                   <div class="modal-body">
                     <div class="form-group pb-2">
                       <input
@@ -99,7 +151,9 @@
                       />
                     </div>
                     <div class="form-group pb-2">
-                      <label for="quantity" class="pb-1">Quantity:</label>
+                      <label for="quantity" class="pb-1"
+                        >Quantity(if limited):</label
+                      >
                       <input
                         type="text"
                         class="form-control"
@@ -116,7 +170,6 @@
                         class="form-control"
                         name="original_price"
                         id="original_price"
-                        required="true"
                         autocomplete="off"
                       />
                     </div>
@@ -143,7 +196,8 @@
             </div>
           </div>
 
-          <div
+          <!--Expenses Modal-->
+          <!-- <div
             class="modal fade"
             id="expensesModal"
             tabindex="-1"
@@ -168,8 +222,8 @@
                     <div class="form-group pb-2">
                       <input
                         type="hidden"
-                        name="weekly_product"
-                        id="weekly_product"
+                        name="weekly_product_misc"
+                        id="weekly_product_misc"
                         value="<%=weekly_product_sales._id%>"
                       />
                     </div>
@@ -205,7 +259,7 @@
                 </form>
               </div>
             </div>
-          </div>
+          </div> -->
 
           <%if(errors) {%> <%errors.forEach((err)=>{%>
           <p><%=err%></p>

@@ -85,3 +85,11 @@ header {
   color: white;
   background: linear-gradient(to bottom, #5e9ffa, #4686e0);
 }
+
+.top_nav {
+  position: fixed !important;
+  top: 10vh;
+  width: 100%;
+  padding: 1rem;
+  background: #1d63dc;
+}

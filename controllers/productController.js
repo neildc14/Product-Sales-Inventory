@@ -10,7 +10,7 @@ exports.index_get = function (req, res, next) {
 exports.add_product_post = [
   body("weekly_product").isLength({ min: 1 }).trim().escape(),
   [body("product_name").toLowerCase().isLength({ min: 1 }).trim().escape()],
-  body("quantity").isLength({ min: 1 }).trim().escape(),
+  body("quantity").isLength().trim().escape(),
   body("original_price").isLength({ min: 1 }).trim().escape(),
   body("selling_price").isLength({ min: 1 }).trim().escape(),
 
