@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('./partials/head')%>
+  <body>
+    <main>
+      <div class="container-fluid mx-0 px-0">
+        <%-include('./partials/nav')%>
+        <div class="container mt-5">
+          <h5 class="bg-primary text-white p-1">
+            <span>Name: </span><%=customer.customer_name%>
+          </h5>
+
+          <section>
+            <table class="table border">
+              <tbody>
+                <tr>
+                  <th scope="row">Address</th>
+                  <td><%=customer.address%></td>
+                </tr>
+                <tr>
+                  <th scope="row">Product Ordered</th>
+                  <td><%=product.product_name%></td>
+                </tr>
+                <tr>
+                  <th scope="row">Quantity</th>
+                  <td><%=customer.quantity_ordered%></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="table-active">Total Purchased</th>
+                  <td class="table-active"><%=customer.total_purchased%></td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+          <section>
+            <hr />
+            <div class="d-flex">
+              <a
+                href="<%=customer.url%>/edit"
+                class="btn btn-primary btn-sm d-flex align-items-center md-18"
+                ><span>Edit</span
+                ><span class="material-symbols-outlined ms-2">
+                  edit_note
+                </span></a
+              >
+              <a class="btn btn-sm btn-light d-flex align-items-center ms-3">
+                <span>Delete</span>
+                <span class="material-symbols-outlined ms-2"> delete </span>
+              </a>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+    <%-include('./partials/scripts')%>
+  </body>
+</html>

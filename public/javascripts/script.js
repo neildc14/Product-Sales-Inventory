@@ -23,3 +23,12 @@ function totalPurchasedValue() {
   totalPurchased.value =
     Number(sellingPrice.value) * Number(quantityOrdered.value);
 }
+
+window.addEventListener("load", () => {
+  const materialSymbols = document.querySelectorAll(
+    ".material-symbols-outlined"
+  );
+  materialSymbols.forEach((symbol) => {
+    symbol.style.cssText = "opacity:1";
+  });
+});

@@ -29,6 +29,14 @@ header {
   font-size: 3rem !important;
 }
 
+.material-symbols-outlined {
+  opacity: 0;
+}
+
+.material-symbols-opacity {
+  opacity: 1;
+}
+
 .hamburger_button {
   border: none !important;
   outline: none !important;
@@ -89,7 +97,53 @@ header {
 .top_nav {
   position: fixed !important;
   top: 10vh;
-  width: 100%;
+  right: 12px;
+  left: 12px;
   padding: 1rem;
   background: #1d63dc;
+}
+
+th,
+td {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+@media (min-width: 520px) {
+  .td_description {
+    width: 65%;
+  }
+}
+
+@media (min-width: 768px) {
+  .td_description {
+    width: 60%;
+  }
+
+  .container {
+    max-width: 60% !important;
+  }
+
+  .top_nav {
+    top: 13vh;
+  }
+}
+
+@media (min-width: 992px) {
+  .top_nav {
+    padding-left: 12.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .top_nav {
+    padding-left: 18rem;
+    left: 0;
+    right: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .td_description {
+    width: 40%;
+  }
 }

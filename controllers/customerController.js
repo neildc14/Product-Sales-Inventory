@@ -1,5 +1,7 @@
 var { validationResult, body } = require("express-validator");
 var Customer = require("../models/Customer");
+var Product = require("../models/Product");
+var async = require("async");
 
 exports.add_customer_post = [
   body("product_ordered").isLength({ min: 1 }).trim().escape(),
@@ -18,7 +20,6 @@ exports.add_customer_post = [
       });
       console.log(errors.array());
       return;
-      
     } else {
       const new_customer = new Customer({
         customer_name: req.body.customer_name,
@@ -41,5 +42,21 @@ exports.add_customer_post = [
 ];
 
 exports.customer_details = function (req, res, next) {
-  res.send("CUSTOMER NOT SUPPORTED");
+  Customer.findById(req.params.id).exec(function (err, customer) {
+    if (err) {
+      return next(err);
+    }
+    Product.findById(customer.product_ordered)
+      .sort({ product_name: "asc" })
+      .exec(function (err, product) {
+        if (err) {
+          return next(err);
+        }
+        res.render("customer_details", {
+          title: "Customer Details",
+          customer: customer,
+          product: product,
+        });
+      });
+  });
 };

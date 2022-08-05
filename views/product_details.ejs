@@ -30,7 +30,7 @@
               </tbody>
             </table>
           </section>
-          <section class="my-4">
+          <section class="my-5">
             <h5 class="bg-secondary text-white p-1">Customers</h5>
             <!-- Button trigger modal -->
             <button
@@ -46,6 +46,7 @@
               <thead>
                 <tr>
                   <th scope="col">Name</th>
+
                   <th scope="col"></th>
                   <th scope="col"></th>
                 </tr>
@@ -53,18 +54,19 @@
               <tbody>
                 <%customers.forEach((customer)=> {%>
                 <tr>
-                  <td><%=customer.customer_name%></td>
-                  <td style="width: 38%">
+                  <td class="td_description"><%=customer.customer_name%></td>
+
+                  <td>
                     <a href="<%=customer.url%>" class="btn btn-sm btn-success"
-                      >View Customer</a
+                      >View Details</a
                     >
                   </td>
-                  <td style="width: 1%" class="px-0">
+                  <td class="px-0">
                     <form action="">
                       <input type="hidden" name="" />
                       <button
                         type="submit"
-                        class="btn m-0 p-0 btn-sm d-flex align-items-center"
+                        class="btn m-0 btn-sm d-flex align-items-center"
                       >
                         <span class="material-symbols-outlined"> delete </span>
                       </button>
