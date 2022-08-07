@@ -49,30 +49,36 @@
                 <tr>
                   <th scope="col">Product</th>
                   <th scope="col" class="px-0">Orders</th>
-                  <th scope="col"></th>
+                  <th scope="col" class="px-0"></th>
                   <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
-                <%products.forEach((product)=>{ %>
+                <%products.forEach((product)=>{ const quantity_arr = [];%>
 
                 <tr>
                   <td class="td_description"><%=product.product_name%></td>
-                  <td class="px-0">10</td>
-                  <td>
+                  <%customers.forEach((customer)=>{%>
+                  <%if(String(customer.product_ordered) === String(product._id))
+                  { quantity_arr.push(customer.quantity_ordered)%> <%}%> <%})%>
+                  <%let sum = 0; quantity_arr.forEach(x => sum += Number(x))%>
+                  <td class="px-0"><%=sum%></td>
+                  <td class="px-0">
                     <a href="<%=product.url%>" class="btn btn-sm btn-success"
                       >View Product</a
                     >
                   </td>
 
-                  <td class="px-0">
-                    <form action="">
+                  <td class="px-0" class="m-0">
+                    <form action="" class="m-0">
                       <input type="hidden" name="" />
                       <button
                         type="submit"
-                        class="btn m-0 btn-sm d-flex align-items-center"
+                        class="btn btn-sm d-flex align-items-center"
                       >
-                        <span class="material-symbols-outlined"> delete </span>
+                        <span class="material-symbols-outlined m-0">
+                          delete
+                        </span>
                       </button>
                     </form>
                   </td>
@@ -107,7 +113,36 @@
           </div>
           <div class="my-4">
             <h5 class="bg-dark text-white p-1">Audit</h5>
-            <section id="audit_container"></section>
+            <section id="audit_container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%let totalCapitalArray = []; products.forEach((product) => {
+                  const capital = []; const quantity_arr = []; %>
+                  <%customers.forEach((customer)=>{%>
+                  <%if(String(customer.product_ordered) === String(product._id))
+                  { quantity_arr.push(customer.quantity_ordered)%> <%}%> <%})%>
+                  <%let totalQuantity = 0; quantity_arr.forEach((quantity) => {
+                  let tot = totalQuantity + Number(quantity); let prod = tot *
+                  Number(product.original_price); capital.push(prod);} ) %>
+                  <%let productCapital= 0; capital.forEach((capita)=>{let c =
+                  Number(productCapital) + Number(capita);
+                  totalCapitalArray.push(c)})%> <%})%>
+                  <tr>
+                    <th scope="row">Total Capital:</th>
+                    <%let totalCapital = 0;
+                    totalCapitalArray.forEach((total)=>{totalCapital +=
+                    Number(total)}) %>
+                    <td><span>₱</span><%=totalCapital%> <span>.00</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
           </div>
           <!-- ProductModal -->
           <div
@@ -158,18 +193,17 @@
                         >Quantity(if limited):</label
                       >
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         name="quantity"
                         id="quantity"
-                        required="true"
                         autocomplete="off"
                       />
                     </div>
                     <div class="form-group pb-2">
                       <label for="quantity" class="pb-1">Original Price:</label>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         name="original_price"
                         id="original_price"
@@ -179,7 +213,7 @@
                     <div class="form-group pb-2">
                       <label for="quantity" class="pb-1"> Selling Price:</label>
                       <input
-                        type="text"
+                        type="number"
                         class="form-control"
                         name="selling_price"
                         id="selling_price"
@@ -198,72 +232,6 @@
               </div>
             </div>
           </div>
-
-          <!--Expenses Modal-->
-          <!-- <div
-            class="modal fade"
-            id="expensesModal"
-            tabindex="-1"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
-            <div class="modal-dialog modal-dialog-centered">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">
-                    Add Expenses
-                  </h5>
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
-                </div>
-                <form action="/weekly_products" method="POST">
-                  <div class="modal-body">
-                    <div class="form-group pb-2">
-                      <input
-                        type="hidden"
-                        name="weekly_product_misc"
-                        id="weekly_product_misc"
-                        value="<%=weekly_product_sales._id%>"
-                      />
-                    </div>
-                    <div class="form-group pb-2">
-                      <label for="misc_name" class="pb-1">Type:</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="misc_name"
-                        id="misc_name"
-                        required="true"
-                        autocomplete="off"
-                      />
-                    </div>
-                    <div class="form-group pb-2">
-                      <label for="amount" class="pb-1">Amount:</label>
-                      <input
-                        type="text"
-                        class="form-control"
-                        name="amount"
-                        id="amount"
-                        required="true"
-                        autocomplete="off"
-                      />
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="reset" class="btn">Reset</button>
-                    <button type="submit" class="btn btn-primary">
-                      Save Product
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div> -->
-
           <%if(errors) {%> <%errors.forEach((err)=>{%>
           <p><%=err%></p>
           <%})%> <%}%>

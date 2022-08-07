@@ -4,6 +4,7 @@ var Product = require("../models/Product");
 var async = require("async");
 
 exports.add_customer_post = [
+  body("weekly_product").isLength({ min: 1 }).trim().escape(),
   body("product_ordered").isLength({ min: 1 }).trim().escape(),
   body("total_purchased").isLength({ min: 1 }).trim().escape(),
   [body("customer_name").toLowerCase().isLength({ min: 1 }).trim().escape()],
@@ -22,6 +23,7 @@ exports.add_customer_post = [
       return;
     } else {
       const new_customer = new Customer({
+        weekly_product: req.body.weekly_product,
         customer_name: req.body.customer_name,
         address: req.body.address,
         quantity_ordered: req.body.quantity_ordered,

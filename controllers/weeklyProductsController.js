@@ -2,6 +2,7 @@ var { validationResult, body } = require("express-validator");
 var WeeklyProducts = require("../models/WeeklyProducts");
 var Product = require("../models/Product");
 var Miscellaneous = require("../models/Miscellaneous");
+var Customer = require("../models/Customer");
 var async = require("async");
 
 exports.add_weekly_product_sales_get = function (req, res, next) {
@@ -47,19 +48,6 @@ exports.weekly_products = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      // Product.find({ weekly_product: results[0]._id })
-      //   .sort({ product_name: "asc" })
-      //   .exec(function (err, product) {
-      //     if (err) {
-      //       return next(err);
-      //     }
-      //     res.render("weekly_product_sales", {
-      //       title: "Weekly Sales",
-      //       weekly_product_sales: results[0],
-      //       products: product,
-      //       errors: null,
-      //     });
-      //   });
       async
         .parallel({
           product: function (callback) {
@@ -72,14 +60,17 @@ exports.weekly_products = function (req, res, next) {
               .sort({ product_name: "asc" })
               .exec(callback);
           },
+          customer: function (callback) {
+            Customer.find().sort({ createdAt: "asc" }).exec(callback);
+          },
         })
         .then(function (asyncresults) {
-          console.log(asyncresults);
           res.render("weekly_product_sales", {
             title: "Weekly Sales",
             weekly_product_sales: results[0],
             products: asyncresults.product,
             miscellaneous: asyncresults.miscellaneous,
+            customers: asyncresults.customer,
             errors: null,
           });
         })

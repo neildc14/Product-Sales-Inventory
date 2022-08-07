@@ -17,22 +17,47 @@
   id="offcanvasRight"
   aria-labelledby="offcanvasRightLabel"
 >
-  <div class="offcanvas-header">
-    <h5 id="offcanvasRightLabel">Menu</h5>
+  <div class="offcanvas-header bg-primary">
+    <h5 id="offcanvasRightLabel" class="text-white">Menu</h5>
     <button
       type="button"
-      class="btn-close text-reset"
+      class="btn-close text-white"
       data-bs-dismiss="offcanvas"
       aria-label="Close"
     ></button>
   </div>
   <div class="offcanvas-body">
-    <nav>
-      <li><a href="/">Dashboard</a></li>
-      <li><a href="/weekly_products">Weekly Product Sales</a></li>
-      <li><a href="">Sales History</a></li>
-      <li><a href="">Consumer Ledger</a></li>
-      <li><a href="">Logout</a></li>
+    <nav class="side_nav">
+      <li>
+        <a href="/" class="d-flex align-items-center"
+          ><span class="material-symbols-outlined me-2"> dashboard </span
+          ><span>Dashboard</span></a
+        >
+      </li>
+      <li>
+        <a href="/weekly_products" class="d-flex align-items-center"
+          ><span class="material-symbols-outlined me-2"> receipt </span
+          ><span>Weekly Product Sales</span></a
+        >
+      </li>
+      <li>
+        <a href="" class="d-flex align-items-center"
+          ><span class="material-symbols-outlined me-2"> history </span
+          ><span>Sales History</span></a
+        >
+      </li>
+      <li>
+        <a href="" class="d-flex align-items-center"
+          ><span class="material-symbols-outlined me-2"> folder_shared </span
+          ><span>Consumer Ledger</span></a
+        >
+      </li>
+      <li>
+        <a href="" class="d-flex align-items-center"
+          ><span class="material-symbols-outlined me-2"> logout </span
+          ><span>Logout</span></a
+        >
+      </li>
     </nav>
   </div>
 </div>

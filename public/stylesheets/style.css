@@ -103,6 +103,19 @@ header {
   background: #1d63dc;
 }
 
+.side_nav li {
+  border-bottom: 1px solid #1d63dc;
+}
+
+.side_nav a {
+  font-size: 1.2rem;
+  font-weight: 500 !important;
+}
+
+table {
+  overflow-x: scroll !important;
+}
+
 th,
 td {
   padding-left: 1rem !important;
@@ -126,6 +139,10 @@ td {
 
   .top_nav {
     top: 13vh;
+  }
+
+  .side_nav a {
+    font-size: 1rem;
   }
 }
 

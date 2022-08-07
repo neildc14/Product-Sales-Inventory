@@ -3,6 +3,10 @@ var Schema = mongoose.Schema;
 
 const CustomerSchema = new Schema(
   {
+    weekly_product: {
+      type: Schema.Types.ObjectId,
+      ref: "WeeklyProducts",
+    },
     customer_name: { type: String, required: true, maxLength: 100 },
     address: String,
     product_ordered: { type: Schema.Types.ObjectId, ref: "Product" },

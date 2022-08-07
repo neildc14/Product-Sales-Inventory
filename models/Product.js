@@ -8,6 +8,7 @@ const ProductSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "WeeklyProducts",
     },
+    customer: { type: Schema.Types.ObjectId, ref: "Customer" },
     product_name: String,
     quantity: Number,
     original_price: Number,

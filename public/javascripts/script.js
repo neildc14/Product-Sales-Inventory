@@ -32,3 +32,6 @@ window.addEventListener("load", () => {
     symbol.style.cssText = "opacity:1";
   });
 });
+
+const quantityOrderedSum = document.querySelectorAll(".quantityOrdered");
+console.log(quantityOrderedSum);

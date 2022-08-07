@@ -111,6 +111,12 @@
                           id="product_ordered"
                           value="<%=product._id%>"
                         />
+                        <input
+                          type="hidden"
+                          name="weekly_product"
+                          id="weekly_product"
+                          value="<%=product.weekly_product%>"
+                        />
                       </div>
                       <div class="form-group pb-2">
                         <label for="customer_name" class="pb-1"
@@ -138,7 +144,7 @@
                       </div>
                       <div class="form-group pb-2">
                         <label for="quantity_ordered" class="pb-1"
-                          >Quanity Ordered:</label
+                          >Quantity Ordered:</label
                         >
                         <input
                           type="text"
