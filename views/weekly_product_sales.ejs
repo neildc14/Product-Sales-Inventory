@@ -20,7 +20,14 @@
               <span class="ms-1"> |</span>
             </li>
           </nav>
-          <div class="border border-2">
+          <button
+            onclick="window.history.back()"
+            class="btn border border-2 border-light d-flex align-items-center back_button me-auto"
+          >
+            <span class="material-symbols-outlined me-2"> arrow_back_ios </span>
+            <span>Go Back</span>
+          </button>
+          <div class="border border-2 mt-3">
             <h6 class="d-flex align-items-center m-0 p-2">
               <span class="pe-2">Week:</span>
               <%=weekly_product_sales.date_start_formatted%>-<%=weekly_product_sales.date_end_formatted
@@ -224,7 +231,7 @@
                     </div>
                   </div>
                   <div class="modal-footer">
-                    <button type="reset" class="btn">Reset</button>
+                    <button type="reset" class="btn bg-light">Reset</button>
                     <button type="submit" class="btn btn-primary">
                       Save Product
                     </button>

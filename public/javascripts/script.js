@@ -32,17 +32,3 @@ window.addEventListener("load", () => {
     symbol.style.cssText = "opacity:1";
   });
 });
-
-// const productsReference = document.querySelector("#productsReference");
-// const customersReference = document.querySelector("#customersReference");
-// const miscellaneousReference = document.querySelector(
-//   "#miscellaneousReference"
-// );
-// const auditTableBody = document.querySelector("#auditTableBody");
-
-// const productsReferenceData = JSON.stringify(
-//   productsReference.dataset.productsReference
-// );
-
-// let parsed = JSON.parse(productsReferenceData);
-// console.log(parsed);

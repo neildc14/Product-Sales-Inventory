@@ -35,4 +35,11 @@ router.post("/weekly_products/:id/", customerController.add_customer_post);
 //view customer
 router.get("/customer/:id/", customerController.customer_details);
 
+//sales history
+router.get("/sales_history", weeklyProductsController.sales_history);
+router.get(
+  "/sales_history/:id",
+  weeklyProductsController.weekly_products_details
+);
+
 module.exports = router;

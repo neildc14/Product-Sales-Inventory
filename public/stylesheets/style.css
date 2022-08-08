@@ -37,7 +37,8 @@ header {
   opacity: 1;
 }
 
-.hamburger_button {
+.hamburger_button,
+.back_button {
   border: none !important;
   outline: none !important;
   box-shadow: none !important;

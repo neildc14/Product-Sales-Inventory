@@ -11,7 +11,7 @@ const WeeklyProductsSchema = new Schema(
 );
 
 WeeklyProductsSchema.virtual("url").get(function () {
-  return "/weekly_products/" + this._id;
+  return "/sales_history/" + this._id;
 });
 
 WeeklyProductsSchema.virtual("date_start_formatted").get(function () {
