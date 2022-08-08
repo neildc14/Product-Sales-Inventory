@@ -14,4 +14,7 @@ const MiscellaneousSchema = new Schema(
   { timestamps: true }
 );
 
+MiscellaneousSchema.virtual("amount_formatted").get(function () {
+  return `₱${this.amount}.00`;
+});
 module.exports = mongoose.model("Miscellaneous", MiscellaneousSchema);

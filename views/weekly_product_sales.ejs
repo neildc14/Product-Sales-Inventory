@@ -103,7 +103,7 @@
 
                   <tr>
                     <td><%=misc.misc_name%></td>
-                    <td style="width: 35%"><%=misc.amount%></td>
+                    <td style="width: 35%"><%=misc.amount_formatted%></td>
                   </tr>
 
                   <%})%>
@@ -112,7 +112,7 @@
             </section>
           </div>
           <div class="my-4">
-            <h5 class="bg-dark text-white p-1">Audit</h5>
+            <h5 class="bg-dark text-white p-1">Cash Flow Report</h5>
             <section id="audit_container">
               <table class="table">
                 <thead>
@@ -122,23 +122,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <%let totalCapitalArray = []; products.forEach((product) => {
-                  const capital = []; const quantity_arr = []; %>
-                  <%customers.forEach((customer)=>{%>
-                  <%if(String(customer.product_ordered) === String(product._id))
-                  { quantity_arr.push(customer.quantity_ordered)%> <%}%> <%})%>
-                  <%let totalQuantity = 0; quantity_arr.forEach((quantity) => {
-                  let tot = totalQuantity + Number(quantity); let prod = tot *
-                  Number(product.original_price); capital.push(prod);} ) %>
-                  <%let productCapital= 0; capital.forEach((capita)=>{let c =
-                  Number(productCapital) + Number(capita);
-                  totalCapitalArray.push(c)})%> <%})%>
                   <tr>
                     <th scope="row">Total Capital:</th>
-                    <%let totalCapital = 0;
-                    totalCapitalArray.forEach((total)=>{totalCapital +=
-                    Number(total)}) %>
-                    <td><span>₱</span><%=totalCapital%> <span>.00</span></td>
+                    <td>
+                      <span>₱</span><%=weekly_total_capital%> <span>.00</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total Sales:</th>
+                    <td>
+                      <span>₱</span><%=weekly_total_sales%> <span>.00</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="table-active">Total Revenue:</th>
+                    <td class="table-active">
+                      <span>₱</span><%=weekly_total_income%>
+                      <span>.00</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>
