@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('./partials/head')%>
+  <body>
+    <main>
+      <div class="weekly_product_sales_container container-fluid mx-0 px-0">
+        <%-include('./partials/nav')%>
+        <div class="container mt-5" style="position: relative !important">
+          <nav class="top_nav d-flex bg-gradient" id="weekly_product_top_nav">
+            <li class="my-0 text-white d-flex align-items-center">
+              <a href="#products_container" class="text-white">Products</a>
+              <span class="ms-1"> |</span>
+            </li>
+            <li class="my-0 ms-4 text-white d-flex align-items-center">
+              <a href="#expenses_container" class="text-white">Expenses</a>
+              <span class="ms-1"> |</span>
+            </li>
+            <li class="my-0 ms-4 text-white d-flex align-items-center">
+              <a href="#audit_container" class="text-white">Audit</a>
+              <span class="ms-1"> |</span>
+            </li>
+          </nav>
+          <button
+            onclick="window.history.back()"
+            class="btn border border-2 border-light d-flex align-items-center back_button me-auto"
+          >
+            <span class="material-symbols-outlined me-2"> arrow_back_ios </span>
+            <span>Go Back</span>
+          </button>
+          <div class="border border-2 border-danger mt-3">
+            <h6 class="d-flex align-items-center m-0 p-2">
+              <span class="pe-2">Week:</span>
+              <%=weekly_product_sales.date_start_formatted%>-<%=weekly_product_sales.date_end_formatted
+              %>
+            </h6>
+          </div>
+          <div class="my-4">
+            <a
+              href="/sale_history/add_product"
+              class="btn btn-sm btn-secondary"
+              data-bs-toggle="modal"
+              data-bs-target="#productModal"
+              >Add Product</a
+            >
+            <a
+              href="<%=weekly_product_sales.url%>/add_expenses"
+              class="btn btn-sm btn-secondary ms-2"
+              >Add Expenses</a
+            >
+            <hr />
+          </div>
+          <h5 class="bg-danger text-white p-1">Products</h5>
+          <section class="products_container" id="products_container">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Product</th>
+                  <th scope="col" class="px-0">Orders</th>
+                  <th scope="col" class="px-0"></th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <%if(products.length <= 0){%>
+                <tr>
+                  <td>No Products Available.</td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                <%}%> <%products.forEach((product)=>{ const quantity_arr = [];%>
+
+                <tr>
+                  <td class="td_description"><%=product.product_name%></td>
+                  <%customers.forEach((customer)=>{%>
+                  <%if(String(customer.product_ordered) === String(product._id))
+                  { quantity_arr.push(customer.quantity_ordered)%> <%}%> <%})%>
+                  <%let sum = 0; quantity_arr.forEach(x => sum += Number(x))%>
+                  <td class="px-0"><%=sum%></td>
+                  <td class="px-0">
+                    <a href="<%=product.url%>" class="btn btn-sm btn-success"
+                      >View Product</a
+                    >
+                  </td>
+
+                  <td class="px-0" class="m-0">
+                    <form action="" class="m-0">
+                      <input type="hidden" name="" />
+                      <button
+                        type="submit"
+                        class="btn btn-sm d-flex align-items-center"
+                      >
+                        <span class="material-symbols-outlined m-0">
+                          delete
+                        </span>
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+
+                <%})%>
+              </tbody>
+            </table>
+          </section>
+          <div class="my-4">
+            <h5 class="bg-danger text-white p-1">Expenses</h5>
+            <section class="products_container" id="expenses_container">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%if(miscellaneous.length <= 0){%>
+                  <tr>
+                    <td>No expenses listed.</td>
+                    <td></td>
+                  </tr>
+                  <%}%> <%miscellaneous.forEach((misc)=>{ %>
+
+                  <tr>
+                    <td><%=misc.misc_name%></td>
+                    <td style="width: 35%"><%=misc.amount_formatted%></td>
+                  </tr>
+
+                  <%})%>
+                </tbody>
+              </table>
+            </section>
+          </div>
+          <div class="my-4">
+            <h5 class="bg-dark text-white p-1">Cash Flow Report</h5>
+            <section id="audit_container">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Type</th>
+                    <th scope="col">Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Total Capital:</th>
+                    <td>
+                      <span>₱</span><%=weekly_total_capital%> <span>.00</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Total Sales:</th>
+                    <td>
+                      <span>₱</span><%=weekly_total_sales%> <span>.00</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row" class="table-active">Total Revenue:</th>
+                    <td class="table-active">
+                      <span>₱</span><%=weekly_total_income%>
+                      <span>.00</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
+          <!-- ProductModal -->
+          <div
+            class="modal fade"
+            id="productModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    Add Product
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <form action="" method="POST">
+                  <div class="modal-body">
+                    <div class="form-group pb-2">
+                      <input
+                        type="hidden"
+                        name="weekly_product"
+                        id="weekly_product"
+                        value="<%=weekly_product_sales._id%>"
+                      />
+                    </div>
+                    <div class="form-group pb-2">
+                      <label for="product_name" class="pb-1"
+                        >Product Name:</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        name="product_name"
+                        id="product_name"
+                        required="true"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="form-group pb-2">
+                      <label for="quantity" class="pb-1"
+                        >Quantity(if limited):</label
+                      >
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="quantity"
+                        id="quantity"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="form-group pb-2">
+                      <label for="quantity" class="pb-1">Original Price:</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="original_price"
+                        id="original_price"
+                        autocomplete="off"
+                      />
+                    </div>
+                    <div class="form-group pb-2">
+                      <label for="quantity" class="pb-1"> Selling Price:</label>
+                      <input
+                        type="number"
+                        class="form-control"
+                        name="selling_price"
+                        id="selling_price"
+                        required="true"
+                        autocomplete="off"
+                      />
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="reset" class="btn bg-light">Reset</button>
+                    <button type="submit" class="btn btn-primary">
+                      Save Product
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          <%if(errors) {%> <%errors.forEach((err)=>{%>
+          <p><%=err%></p>
+          <%})%> <%}%>
+        </div>
+      </div>
+    </main>
+    <%-include('./partials/scripts')%>
+  </body>
+</html>

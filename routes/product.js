@@ -28,18 +28,31 @@ router.post("/weekly_products", productController.add_product_post);
 router.get("/weekly_products/add_expenses", miscController.add_misc_get);
 router.post("/weekly_products/add_expenses", miscController.add_misc_post);
 
-//view product
+//view product and post product
 router.get("/weekly_products/:id/", productController.product_details);
 router.post("/weekly_products/:id/", customerController.add_customer_post);
 
 //view customer
 router.get("/customer/:id/", customerController.customer_details);
 
-//sales history
+//sales history and post product
 router.get("/sales_history", weeklyProductsController.sales_history);
 router.get(
   "/sales_history/:id",
   weeklyProductsController.weekly_products_details
+);
+router.post(
+  "/sales_history/:id",
+  productController.sales_history_add_product_post
+);
+
+router.get(
+  "/sales_history/:id/add_expenses",
+  miscController.sales_history_add_misc_get
+);
+router.post(
+  "/sales_history/:id/add_expenses",
+  miscController.sales_history_add_misc_post
 );
 
 module.exports = router;

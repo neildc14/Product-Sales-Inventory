@@ -180,7 +180,7 @@ exports.weekly_products_details = function (req, res, next) {
               .exec(callback);
           },
           miscellaneous: function (callback) {
-            Miscellaneous.find({ weekly_product: result._id })
+            Miscellaneous.find({ weekly_product_misc: result._id })
               .sort({ product_name: "asc" })
               .exec(callback);
           },
@@ -242,9 +242,13 @@ exports.weekly_products_details = function (req, res, next) {
             TotalProductsCapital + TotalMiscellaneousExpenses;
 
           let WeeklyTotalIncome = WeeklyTotalSales - WeeklyProductsCapital;
+          if (WeeklyTotalIncome < 0) {
+            WeeklyTotalIncome = 0;
+          }
 
-          res.render("weekly_product_sales", {
-            title: "Weekly Sales",
+          console.log(asyncresults.product);
+          res.render("sales_history_weekly_products", {
+            title: "Weekly Sales History Detail",
             weekly_product_sales: result,
             products: asyncresults.product,
             miscellaneous: asyncresults.miscellaneous,

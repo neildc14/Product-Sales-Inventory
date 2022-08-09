@@ -65,3 +65,39 @@ exports.product_details = function (req, res, next) {
       });
   });
 };
+
+exports.sales_history_add_product_post = [
+  body("weekly_product").isLength({ min: 1 }).trim().escape(),
+  [body("product_name").toLowerCase().isLength({ min: 1 }).trim().escape()],
+  body("quantity").isLength().trim().escape(),
+  body("original_price").isLength({ min: 1 }).trim().escape(),
+  body("selling_price").isLength({ min: 1 }).trim().escape(),
+
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      res.render("weekly_product_sales", {
+        title: "Add Product",
+        errors: errors.array(),
+      });
+      console.log(errors.array());
+      return;
+    } else {
+      const new_product = new Product({
+        weekly_product: req.body.weekly_product,
+        product_name: req.body.product_name,
+        quantity: req.body.quantity,
+        original_price: req.body.original_price,
+        selling_price: req.body.selling_price,
+      });
+      console.log(new_product);
+      new_product.save((err) => {
+        if (err) {
+          return next(err);
+        }
+        const weekly_products_url = new_product.weekly_product;
+        res.redirect(`/sales_history/${weekly_products_url}`);
+      });
+    }
+  },
+];
