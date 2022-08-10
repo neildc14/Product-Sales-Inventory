@@ -55,4 +55,8 @@ router.post(
   miscController.sales_history_add_misc_post
 );
 
+//customer ledger
+router.get("/customer_ledger", customerController.customer_ledger);
+router.get("/customer_ledger/:id", customerController.customer_ledger_details);
+
 module.exports = router;

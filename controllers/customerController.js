@@ -1,7 +1,7 @@
 var { validationResult, body } = require("express-validator");
 var Customer = require("../models/Customer");
 var Product = require("../models/Product");
-var async = require("async");
+var WeeklyProducts = require("../models/WeeklyProducts");
 
 exports.add_customer_post = [
   body("weekly_product").isLength({ min: 1 }).trim().escape(),
@@ -60,5 +60,46 @@ exports.customer_details = function (req, res, next) {
           product: product,
         });
       });
+  });
+};
+
+exports.customer_ledger = function (req, res, next) {
+  WeeklyProducts.find()
+    .sort({ createdAt: "desc" })
+    .exec(function (err, results) {
+      if (err) {
+        return next(err);
+      }
+      if (results === null) {
+        var err = new Error("Weekly Sales Product not found");
+        err.status = 404;
+        return next(err);
+      }
+
+      res.render("customer_ledger", {
+        title: "Customer Ledger",
+        all_weekly_product_sales: results,
+      });
+    });
+};
+
+exports.customer_ledger_details = function (req, res, next) {
+  WeeklyProducts.findById(req.params.id).exec(function (err, weekly_product) {
+    if (err) {
+      return next(err);
+    }
+    Customer.find({ weekly_product: weekly_product._id }).exec(function (
+      err,
+      customers
+    ) {
+      if (err) {
+        return next(err);
+      }
+      console.log(customers);
+      res.render("customer_ledger_details", {
+        title: "Customer Lists",
+        customers: customers,
+      });
+    });
   });
 };

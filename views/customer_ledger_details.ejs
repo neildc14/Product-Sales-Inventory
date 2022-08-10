@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%-include('./partials/head')%>
+  <body>
+    <main>
+      <div class="container-fluid mx-0 px-0">
+        <%-include('./partials/nav')%>
+
+        <div class="container">
+          <button
+            onclick="window.history.back()"
+            class="btn border border-2 border-light d-flex align-items-center back_button me-auto"
+          >
+            <span class="material-symbols-outlined me-2"> arrow_back_ios </span>
+            <span>Go Back</span>
+          </button>
+          <div class="mt-5">
+            <h5 class="bg-primary text-white p-1">
+              <span>Customer Lists</span>
+            </h5>
+            <section>
+              <%if(customers.length <= 0){%>
+              <div
+                class="alert alert-warning d-flex align-items-center"
+                role="alert"
+              >
+                <span class="material-symbols-outlined me-2"> report </span
+                ><span>No Customer Listed.</span>
+              </div>
+
+              <%} else{%>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%customers.forEach((customer)=> {%>
+                  <tr>
+                    <td class="td_description"><%=customer.customer_name%></td>
+                    <td class="px-0">
+                      <a href="<%=customer.url%>" class="btn btn-sm btn-success"
+                        >View Customer</a
+                      >
+                    </td>
+                    <td class="px-0">
+                      <form action="">
+                        <input type="hidden" name="" />
+                        <button
+                          type="submit"
+                          class="btn m-0 btn-sm d-flex align-items-center"
+                        >
+                          <span class="material-symbols-outlined">
+                            delete
+                          </span>
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+
+                  <%})%>
+                </tbody>
+              </table>
+              <%}%>
+            </section>
+          </div>
+        </div>
+      </div>
+    </main>
+    <%-include('./partials/scripts')%>
+  </body>
+</html>
