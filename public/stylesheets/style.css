@@ -164,4 +164,8 @@ td {
   .td_description {
     width: 40%;
   }
+
+  .sub_container {
+    padding: 0 1.5rem !important;
+  }
 }

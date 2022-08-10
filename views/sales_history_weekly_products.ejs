@@ -63,10 +63,13 @@
               <tbody>
                 <%if(products.length <= 0){%>
                 <tr>
-                  <td>No Products Available.</td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
+                  <div
+                    class="alert alert-warning d-flex align-items-center"
+                    role="alert"
+                  >
+                    <span class="material-symbols-outlined me-2"> report </span
+                    ><span>No Products Available.</span>
+                  </div>
                 </tr>
                 <%}%> <%products.forEach((product)=>{ const quantity_arr = [];%>
 
@@ -105,6 +108,18 @@
           <div class="my-4">
             <h5 class="bg-danger text-white p-1">Expenses</h5>
             <section class="products_container" id="expenses_container">
+              <%if(miscellaneous.length <= 0){%>
+
+              <div
+                class="alert alert-warning d-flex align-items-center"
+                role="alert"
+              >
+                <span class="material-symbols-outlined me-2"> report </span
+                ><span>No Expenses Listed.</span>
+              </div>
+
+              <%} else{%>
+
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -113,12 +128,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <%if(miscellaneous.length <= 0){%>
-                  <tr>
-                    <td>No expenses listed.</td>
-                    <td></td>
-                  </tr>
-                  <%}%> <%miscellaneous.forEach((misc)=>{ %>
+                  <%miscellaneous.forEach((misc)=>{ %>
 
                   <tr>
                     <td><%=misc.misc_name%></td>
@@ -128,6 +138,8 @@
                   <%})%>
                 </tbody>
               </table>
+
+              <%}%>
             </section>
           </div>
           <div class="my-4">

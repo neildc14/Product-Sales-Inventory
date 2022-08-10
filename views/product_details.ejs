@@ -52,11 +52,21 @@
               Add Customer
             </button>
             <hr />
+            <%if(customers.length <= 0){%>
+            <div
+              class="alert alert-warning d-flex align-items-center"
+              role="alert"
+            >
+              <span class="material-symbols-outlined me-2"> report </span
+              ><span>No Customer Ordered.</span>
+            </div>
+
+            <%} else{%>
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
-
+                  <th scope="col" class="px-0">Orders</th>
                   <th scope="col"></th>
                   <th scope="col"></th>
                 </tr>
@@ -65,6 +75,7 @@
                 <%customers.forEach((customer)=> {%>
                 <tr>
                   <td class="td_description"><%=customer.customer_name%></td>
+                  <td class="px-0"><%=customer.quantity_ordered%></td>
 
                   <td>
                     <a href="<%=customer.url%>" class="btn btn-sm btn-success"
@@ -86,6 +97,7 @@
                 <%})%>
               </tbody>
             </table>
+            <%}%>
 
             <!-- Modal -->
             <div

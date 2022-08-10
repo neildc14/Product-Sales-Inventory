@@ -61,7 +61,7 @@ exports.weekly_products = function (req, res, next) {
               .exec(callback);
           },
           miscellaneous: function (callback) {
-            Miscellaneous.find({ weekly_product: results[0]._id })
+            Miscellaneous.find({ weekly_product_misc: results[0]._id })
               .sort({ product_name: "asc" })
               .exec(callback);
           },
@@ -87,15 +87,15 @@ exports.weekly_products = function (req, res, next) {
 
             let TotalQuantityEachProducts = 0;
             quantityArray.forEach((quantity) => {
-              let OverallQuantity = TotalQuantityEachProducts + quantity;
-              let quantityMultipliedToOriginalPrice =
-                OverallQuantity * Number(product.original_price);
-              let quantityMultipliedToSellingPrice =
-                OverallQuantity * Number(product.selling_price);
-
-              TotalCapitalArray.push(quantityMultipliedToOriginalPrice);
-              TotalSalesArray.push(quantityMultipliedToSellingPrice);
+              TotalQuantityEachProducts += quantity;
             });
+            let quantityMultipliedToOriginalPrice =
+              TotalQuantityEachProducts * Number(product.original_price);
+
+            let quantityMultipliedToSellingPrice =
+              TotalQuantityEachProducts * Number(product.selling_price);
+            TotalCapitalArray.push(quantityMultipliedToOriginalPrice);
+            TotalSalesArray.push(quantityMultipliedToSellingPrice);
           });
 
           asyncresults.miscellaneous.forEach((miscellaneous) => {
@@ -208,17 +208,19 @@ exports.weekly_products_details = function (req, res, next) {
 
             let TotalQuantityEachProducts = 0;
             quantityArray.forEach((quantity) => {
-              let OverallQuantity = TotalQuantityEachProducts + quantity;
-              let quantityMultipliedToOriginalPrice =
-                OverallQuantity * Number(product.original_price);
-              let quantityMultipliedToSellingPrice =
-                OverallQuantity * Number(product.selling_price);
-
-              TotalCapitalArray.push(quantityMultipliedToOriginalPrice);
-              TotalSalesArray.push(quantityMultipliedToSellingPrice);
+              TotalQuantityEachProducts += quantity;
             });
+
+            let quantityMultipliedToOriginalPrice =
+              TotalQuantityEachProducts * Number(product.original_price);
+
+            let quantityMultipliedToSellingPrice =
+              TotalQuantityEachProducts * Number(product.selling_price);
+            TotalCapitalArray.push(quantityMultipliedToOriginalPrice);
+            TotalSalesArray.push(quantityMultipliedToSellingPrice);
           });
 
+          console.log(TotalCapitalArray);
           asyncresults.miscellaneous.forEach((miscellaneous) => {
             MiscellaneousExpensesArray.push(miscellaneous.amount);
           });
@@ -246,7 +248,6 @@ exports.weekly_products_details = function (req, res, next) {
             WeeklyTotalIncome = 0;
           }
 
-          console.log(asyncresults.product);
           res.render("sales_history_weekly_products", {
             title: "Weekly Sales History Detail",
             weekly_product_sales: result,

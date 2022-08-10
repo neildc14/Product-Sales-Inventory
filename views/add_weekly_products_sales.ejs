@@ -5,9 +5,16 @@
     <main>
       <div class="container-fluid mx-0 px-0">
         <%-include('./partials/nav')%>
-        <div class="container mt-3 px-4">
-          <h5>Add Weekly Sales</h5>
-          <div class="my-4">
+        <div class="container sub_container">
+          <button
+            onclick="window.history.back()"
+            class="btn border border-2 border-light d-flex align-items-center back_button"
+          >
+            <span class="material-symbols-outlined me-2"> arrow_back_ios </span>
+            <span>Go Back</span>
+          </button>
+          <div class="my-4" style="max-width: 498px; margin: 0 auto">
+            <h5>Add Weekly Sales</h5>
             <form action="" method="POST">
               <div class="form-group">
                 <label for="date_start">From:</label>

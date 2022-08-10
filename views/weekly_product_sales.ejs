@@ -51,6 +51,17 @@
           </div>
           <h5 class="bg-primary text-white p-1">Products</h5>
           <section class="products_container" id="products_container">
+            <%if(products.length <= 0) {%>
+
+            <div
+              class="alert alert-warning d-flex align-items-center"
+              role="alert"
+            >
+              <span class="material-symbols-outlined me-2"> report </span
+              ><span>No Products Available.</span>
+            </div>
+
+            <%} else{%>
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -94,10 +105,22 @@
                 <%})%>
               </tbody>
             </table>
+            <%}%>
           </section>
           <div class="my-4">
             <h5 class="bg-primary text-white p-1">Expenses</h5>
-            <section class="products_container" id="expenses_container">
+            <section class="products_container">
+              <%if(miscellaneous.length <= 0) {%>
+              <tr>
+                <div
+                  class="alert alert-warning d-flex align-items-center"
+                  role="alert"
+                >
+                  <span class="material-symbols-outlined me-2"> report </span
+                  ><span>No Expenses Listed.</span>
+                </div>
+              </tr>
+              <%} else {%>
               <table class="table table-striped">
                 <thead>
                   <tr>
@@ -110,12 +133,13 @@
 
                   <tr>
                     <td><%=misc.misc_name%></td>
-                    <td style="width: 35%"><%=misc.amount_formatted%></td>
+                    <td><%=misc.amount_formatted%></td>
                   </tr>
 
                   <%})%>
                 </tbody>
               </table>
+              <%}%>
             </section>
           </div>
           <div class="my-4">
