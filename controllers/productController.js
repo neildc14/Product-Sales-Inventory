@@ -78,7 +78,7 @@ exports.add_product_post = [
     if (!errors.isEmpty()) {
       res.render("weekly_product_sales", {
         title: "Add Product",
-        product: req.body,
+        product_reset: req.body,
         errors: errors.array(),
       });
       console.log(errors.array());
@@ -119,6 +119,7 @@ exports.product_details = function (req, res, next) {
           product: product,
           customers: customers,
           errors: null,
+          customer_reset: undefined,
         });
       });
   });

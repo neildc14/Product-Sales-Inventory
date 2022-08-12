@@ -218,6 +218,7 @@
                         id="product_name"
                         required="true"
                         autocomplete="off"
+                        value="<%=product_reset !== undefined ? product_reset.product_name : ''%>"
                       />
                     </div>
                     <div class="form-group pb-2">
@@ -230,6 +231,7 @@
                         name="quantity"
                         id="quantity"
                         autocomplete="off"
+                        value="<%=product_reset !== undefined ? product_reset.quantity : ''%>"
                       />
                     </div>
                     <div class="form-group pb-2">
@@ -240,6 +242,7 @@
                         name="original_price"
                         id="original_price"
                         autocomplete="off"
+                        value="<%=product_reset !== undefined ? product_reset.original_price : ''%>"
                       />
                     </div>
                     <div class="form-group pb-2">
@@ -251,6 +254,7 @@
                         id="selling_price"
                         required="true"
                         autocomplete="off"
+                        value="<%=product_reset !== undefined ? product_reset.selling_price : ''%>"
                       />
                     </div>
                   </div>

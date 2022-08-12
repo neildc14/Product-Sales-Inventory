@@ -131,6 +131,7 @@ exports.weekly_products = function (req, res, next) {
             weekly_total_capital: WeeklyProductsCapital,
             weekly_total_sales: WeeklyTotalSales,
             weekly_total_income: WeeklyTotalIncome,
+            product_reset: undefined,
             errors: null,
           });
         })
@@ -257,6 +258,7 @@ exports.weekly_products_details = function (req, res, next) {
             weekly_total_capital: WeeklyProductsCapital,
             weekly_total_sales: WeeklyTotalSales,
             weekly_total_income: WeeklyTotalIncome,
+            product_reset: undefined,
             errors: null,
           });
         })

@@ -16,8 +16,8 @@ exports.add_customer_post = [
     if (!errors.isEmpty()) {
       res.render("product_details", {
         title: "Product Details",
-        product: product,
         errors: errors.array(),
+        customer_reset: req.body,
       });
       console.log(errors.array());
       return;

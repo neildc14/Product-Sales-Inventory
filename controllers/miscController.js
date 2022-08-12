@@ -15,6 +15,7 @@ exports.add_misc_get = function (req, res, next) {
         title: "Add Expenses",
         weekly_product_sales: results[0],
         errors: null,
+        misc_reset: undefined,
       });
     });
 };
@@ -32,6 +33,7 @@ exports.add_misc_post = [
         title: "Add Expenses",
         weekly_product_sales: results[0],
         errors: errors.array(),
+        misc_reset: req.body,
       });
       console.log(errors.array());
       return;
