@@ -55,34 +55,49 @@ header {
   font-weight: 600;
 }
 
-.add_icon {
-  margin-left: 1rem;
-  color: white;
-  background-color: #1d63dc;
-  border-radius: 100%;
+.index_flex {
+  flex-direction: column;
 }
 
-.add_icon:hover {
-  font-size: 3.3rem !important;
-  transition: all 0.2s ease-in-out;
+.index_container {
+  margin-top: 1rem;
+  padding-bottom: 10rem;
+  border: 1px solid rgb(247, 247, 247);
+  background: rgb(247, 247, 247);
+  border-radius: 1rem;
 }
 
+.dashboard_panel .card {
+  width: 100%;
+  max-width: 350px;
+  margin: 0 auto;
+  border-radius: 4px;
+  justify-content: space-between !important;
+  align-items: center;
+}
+
+.dashboard_panel img {
+  width: 3rem;
+  height: 3rem;
+}
+
+.dashboard_panel,
 .dashboard_nav {
-  margin-top: 3rem;
-  gap: 2rem;
+  gap: 1rem;
 }
+
 .dashboard_list {
-  margin-bottom: 1rem;
+  margin: 0 auto;
+  width: 100% !important;
+  max-width: 350px;
 }
 
 .dashboard_list a {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0.6rem 3rem;
-  width: 100% !important;
-  max-width: 350px;
-  margin: 0 auto;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 3rem;
   border-radius: 4px;
   background: linear-gradient(to bottom, #2f7ae5, #3e88ef);
   font-size: 1.2rem;
@@ -92,7 +107,7 @@ header {
 
 .dashboard_list a:hover {
   color: white;
-  background: linear-gradient(to bottom, #5e9ffa, #4686e0);
+  background: #0b6aee;
 }
 
 .top_nav {
@@ -105,12 +120,30 @@ header {
 }
 
 .side_nav li {
-  border-bottom: 1px solid #1d63dc;
+  margin: 0.5rem 0 !important;
+  padding: 0.5rem 1rem;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.side_nav li:active,
+.side_nav li:hover,
+.side_nav li:focus {
+  background: #8eb8ff;
+  color: #035df8 !important;
 }
 
 .side_nav a {
   font-size: 1.2rem;
   font-weight: 500 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.side_nav a:hover,
+.side_nav a:focus,
+.side_nav a:active {
+  color: #035df8 !important;
 }
 
 table {
@@ -138,6 +171,15 @@ td {
     max-width: 60% !important;
   }
 
+  /* .index_container {
+    max-width: 70% !important;
+  }
+
+  .dashboard_list,
+  .dashboard_panel .card {
+    max-width: 30%;
+  } */
+
   .top_nav {
     top: 13vh;
   }
@@ -145,13 +187,21 @@ td {
   .side_nav a {
     font-size: 1rem;
   }
+
+  .index_flex {
+    flex-direction: row !important;
+  }
 }
 
 @media (min-width: 992px) {
   .top_nav {
     padding-left: 12.5rem;
   }
+  .dashboard_list a {
+    padding: 0.5rem 2rem;
+  }
 }
+
 @media (min-width: 1024px) {
   .top_nav {
     padding-left: 18rem;

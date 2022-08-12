@@ -6,7 +6,9 @@
     data-bs-target="#offcanvasRight"
     aria-controls="offcanvasRight"
   >
-    <span class="material-symbols-outlined material-icons md-48"> menu </span>
+    <span class="material-symbols-outlined material-icons md-48 text-secondary">
+      menu
+    </span>
   </button>
 
   <a href="/"><img src="/images/logo.png" alt="logo" class="logo" /></a>
@@ -18,8 +20,8 @@
   id="offcanvasRight"
   aria-labelledby="offcanvasRightLabel"
 >
-  <div class="offcanvas-header bg-primary">
-    <h5 id="offcanvasRightLabel" class="text-white">Menu</h5>
+  <div class="offcanvas-header bg-light">
+    <h5 id="offcanvasRightLabel" class="text-secondary">Menu</h5>
     <button
       type="button"
       class="btn-close text-white"
@@ -27,35 +29,47 @@
       aria-label="Close"
     ></button>
   </div>
-  <div class="offcanvas-body">
+  <div class="offcanvas-body ps-0">
     <nav class="side_nav">
       <li>
-        <a href="/" class="d-flex align-items-center"
-          ><span class="material-symbols-outlined me-2"> dashboard </span
+        <a href="/" class="d-flex align-items-center text-secondary"
+          ><span class="material-symbols-outlined me-3"> dashboard </span
           ><span>Dashboard</span></a
         >
       </li>
       <li>
-        <a href="/weekly_products" class="d-flex align-items-center"
-          ><span class="material-symbols-outlined me-2"> receipt </span
+        <a
+          href="/weekly_products"
+          class="d-flex align-items-center text-secondary"
+          ><span class="material-symbols-outlined me-3"> receipt </span
           ><span>Weekly Product Sales</span></a
         >
       </li>
       <li>
-        <a href="/sales_history" class="d-flex align-items-center"
-          ><span class="material-symbols-outlined me-2"> history </span
+        <a
+          href="/sales_history"
+          class="d-flex align-items-center text-secondary"
+          ><span class="material-symbols-outlined me-3"> history </span
           ><span>Sales History</span></a
         >
       </li>
       <li>
-        <a href="/customer_ledger" class="d-flex align-items-center"
-          ><span class="material-symbols-outlined me-2"> folder_shared </span
+        <a
+          href="/customer_ledger"
+          class="d-flex align-items-center text-secondary"
+          ><span class="material-symbols-outlined me-3"> folder_shared </span
           ><span>Consumer Ledger</span></a
         >
       </li>
       <li>
-        <a href="" class="d-flex align-items-center"
-          ><span class="material-symbols-outlined me-2"> logout </span
+        <a href="" class="d-flex align-items-center text-secondary"
+          ><span class="material-symbols-outlined me-3"> summarize </span
+          ><span>Cash Flow Reports</span></a
+        >
+      </li>
+      <li>
+        <a href="" class="d-flex align-items-center text-secondary"
+          ><span class="material-symbols-outlined me-3"> logout </span
           ><span>Logout</span></a
         >
       </li>

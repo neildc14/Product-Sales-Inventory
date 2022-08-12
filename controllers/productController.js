@@ -1,12 +1,69 @@
 var { validationResult, body } = require("express-validator");
 var Product = require("../models/Product");
 var Customer = require("../models/Customer");
+var Miscellaneous = require("../models/Miscellaneous");
 var async = require("async");
 
 exports.index_get = function (req, res, next) {
-  res.render("index", {
-    title: " Sales Inventory",
-  });
+  async
+    .parallel({
+      customers: function (callback) {
+        Customer.find().exec(callback);
+      },
+      products: function (callback) {
+        Product.find().exec(callback);
+      },
+      miscellaneous: function (callback) {
+        Miscellaneous.find().exec(callback);
+      },
+    })
+    .then((asyncresults) => {
+      const productCapitalArray = [];
+      const salesArray = [];
+      const expensesArray = [];
+      asyncresults.customers.forEach((customer) => {
+        asyncresults.products.forEach((product) => {
+          if (String(customer.product_ordered) === String(product._id)) {
+            let productCapital =
+              customer.quantity_ordered * product.original_price;
+            productCapitalArray.push(productCapital);
+            salesArray.push(customer.total_purchased);
+          }
+        });
+      });
+
+      asyncresults.miscellaneous.forEach((miscellanous) => {
+        expensesArray.push(miscellanous.amount);
+      });
+
+      let TotalExpenses = 0;
+      expensesArray.forEach((expenses) => {
+        TotalExpenses += expenses;
+      });
+
+      let TotalProductCapital = 0;
+      productCapitalArray.forEach((productCapital) => {
+        TotalProductCapital += productCapital;
+      });
+
+      let TotalSales = 0;
+      salesArray.forEach((sales) => {
+        TotalSales += sales;
+      });
+
+      let = TotalCapital = TotalProductCapital + TotalExpenses;
+      let TotalRevenue = TotalSales - TotalCapital;
+
+      res.render("index", {
+        title: " Sales Inventory",
+        TotalSales: TotalSales,
+        TotalCapital: TotalCapital,
+        TotalRevenue: TotalRevenue,
+      });
+    })
+    .catch((err) => {
+      return next(err);
+    });
 };
 
 exports.add_product_post = [
@@ -21,6 +78,7 @@ exports.add_product_post = [
     if (!errors.isEmpty()) {
       res.render("weekly_product_sales", {
         title: "Add Product",
+        product: req.body,
         errors: errors.array(),
       });
       console.log(errors.array());
@@ -79,6 +137,7 @@ exports.sales_history_add_product_post = [
       res.render("weekly_product_sales", {
         title: "Add Product",
         errors: errors.array(),
+        product: req.body,
       });
       console.log(errors.array());
       return;

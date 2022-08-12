@@ -5,40 +5,69 @@
     <main>
       <div class="container-fluid px-0 mx-0">
         <%-include('./partials/nav')%>
-        <div class="container">
-          <!-- <div class="col col-sm-12 col-xs-12 col-md-12">
-            <div class="card bg-light">
-              <div class="card-title">Title</div>
-              <div class="card-body">Body</div>
-            </div>
-          </div> -->
+        <div class="container index_container">
           <div class="row">
-            <div class="col col-sm-12 col-xs-12 col-md-12">
-              <nav class="dashboard_nav d-flex flex-column">
-                <li class="dashboard_list">
+            <div class="col col-sm-12 col-xs-12 col-md-12 col-lg-12 mt-5">
+              <div class="dashboard_panel d-flex index_flex">
+                <div
+                  class="card bg-white px-4 py-3 d-flex flex-row bg-gradient mb-2"
+                >
+                  <div class="card-title">
+                    <h3>Revenue</h3>
+                    <div>
+                      <h6 class="text-secondary">₱<%=TotalRevenue%>.00</h6>
+                    </div>
+                  </div>
+
+                  <div><img src="/images/profits.png" alt="" /></div>
+                </div>
+                <div
+                  class="card bg-white px-4 py-3 d-flex flex-row bg-gradient mb-2"
+                >
+                  <div class="card-title">
+                    <h3>Sales</h3>
+                    <div>
+                      <h6 class="text-secondary">₱<%=TotalSales%>.00</h6>
+                    </div>
+                  </div>
+
+                  <div><img src="/images/growth.png" alt="" /></div>
+                </div>
+                <div
+                  class="card bg-white px-4 py-3 d-flex flex-row bg-gradient mb-2"
+                >
+                  <div class="card-title">
+                    <h3>Capital</h3>
+                    <div>
+                      <h6 class="text-secondary">₱<%=TotalCapital%>.00</h6>
+                    </div>
+                  </div>
+
+                  <div><img src="/images/accounting.png" alt="" /></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col col-sm-12 col-xs-12 col-md-12 col-lg-12 mt-4">
+              <nav class="dashboard_nav d-flex index_flex">
+                <div class="dashboard_list">
                   <a href="/add_weekly_product_sales"
-                    ><span class="material-symbols-outlined material-icons">
-                      event
-                    </span>
-                    Add New Week Sales</a
+                    ><span class="material-symbols-outlined"> add </span> Week
+                    Sales</a
                   >
-                </li>
-                <li class="dashboard_list">
+                </div>
+                <div class="dashboard_list">
                   <a href="/weekly_products"
-                    ><span class="material-symbols-outlined material-icons">
-                      category
-                    </span>
-                    Add New Product</a
+                    ><span class="material-symbols-outlined"> add </span>
+                    Product</a
                   >
-                </li>
-                <li class="dashboard_list">
+                </div>
+                <div class="dashboard_list">
                   <a href="/weekly_products/add_expenses"
-                    ><span class="material-symbols-outlined material-icons">
-                      local_atm
-                    </span>
-                    Add New Expenses</a
+                    ><span class="material-symbols-outlined"> add </span>
+                    Expenses</a
                   >
-                </li>
+                </div>
               </nav>
             </div>
           </div>
