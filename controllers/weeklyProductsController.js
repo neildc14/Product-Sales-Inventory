@@ -267,3 +267,31 @@ exports.weekly_products_details = function (req, res, next) {
         });
     });
 };
+
+exports.product_with_customers_delete = function (req, res, next) {
+  const id = req.params.id;
+  Product.findById(id).exec(function (err, product) {
+    if (err) {
+      return next(err);
+    }
+    Customer.find({ product_ordered: product._id })
+      .sort({ customer_name: "asc" })
+      .exec(function (err, customers) {
+        if (err) {
+          return next(err);
+        }
+
+        Product.findByIdAndRemove(id).then(() => {
+          customers.forEach((customer) => {
+            Customer.findByIdAndRemove(customer.id)
+              .then((result) => {
+                res.json({ redirect: "/weekly_products" });
+              })
+              .catch((err) => {
+                return next(err);
+              });
+          });
+        });
+      });
+  });
+};

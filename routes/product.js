@@ -20,9 +20,11 @@ router.post(
 
 //weekly_products
 router.get("/weekly_products", weeklyProductsController.weekly_products);
-
-//add products
 router.post("/weekly_products", productController.add_product_post);
+router.delete(
+  "/weekly_products",
+  weeklyProductsController.product_with_customers_delete
+);
 
 //add miscellaneous
 router.get("/weekly_products/add_expenses", miscController.add_misc_get);
@@ -32,8 +34,10 @@ router.post("/weekly_products/add_expenses", miscController.add_misc_post);
 router.get("/weekly_products/:id/", productController.product_details);
 router.post("/weekly_products/:id/", customerController.add_customer_post);
 
-//view customer
-router.get("/customer/:id/", customerController.customer_details);
+//customer
+router.get("/customer/:id", customerController.customer_details);
+router.get("/customer/:id/delete", customerController.customer_delete_get);
+router.delete("/customer/:id/delete", customerController.customer_delete_post);
 
 //sales history and post product
 router.get("/sales_history", weeklyProductsController.sales_history);

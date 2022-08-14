@@ -1,4 +1,5 @@
 var { validationResult, body } = require("express-validator");
+var mongoose = require("mongoose");
 var Customer = require("../models/Customer");
 var Product = require("../models/Product");
 var WeeklyProducts = require("../models/WeeklyProducts");
@@ -101,5 +102,55 @@ exports.customer_ledger_details = function (req, res, next) {
         customers: customers,
       });
     });
+  });
+};
+
+exports.customer_delete_get = function (req, res, next) {
+  Customer.findById(req.params.id).exec(function (err, customer) {
+    if (err) {
+      return next(err);
+    }
+    if (customer === null) {
+      res.redirect("/weekly_products");
+    } else {
+      Product.findById(customer.product_ordered)
+        .sort({ product_name: "asc" })
+        .exec(function (err, product) {
+          if (err) {
+            return next(err);
+          }
+
+          res.render("delete_customer", {
+            title: "Delete Customer",
+            customer: customer,
+            product: product,
+          });
+        });
+    }
+  });
+};
+
+exports.customer_delete_post = function (req, res, next) {
+  const id = req.params.id;
+  Customer.findById(id).exec(function (err, customer) {
+    if (err) {
+      return next(err);
+    }
+
+    Product.findById(customer.product_ordered)
+      .sort({ product_name: "asc" })
+      .exec(function (err, product) {
+        if (err) {
+          return next(err);
+        }
+
+        Customer.findByIdAndRemove(id)
+          .then((result) => {
+            res.json({ redirect: product.url });
+          })
+          .catch((err) => {
+            return next(err);
+          });
+      });
   });
 };

@@ -32,3 +32,36 @@ window.addEventListener("load", () => {
     symbol.style.cssText = "opacity:1";
   });
 });
+
+let deleteData = document.querySelector(".customerData");
+if (deleteData) {
+  deleteData.addEventListener("click", () => {
+    url = `/customer/${deleteData.dataset.id}/delete`;
+    fetch(url, {
+      method: "DELETE",
+      headers: { "Content-type": "application/json" },
+    })
+      .then((response) => response.json())
+      .then((data) => (window.location.href = data.redirect))
+      .catch((err) => console.log(err));
+  });
+}
+
+let deleteProducts = document.querySelectorAll("button.productID");
+if (deleteProducts) {
+  deleteProducts.forEach((product) => {
+    product.addEventListener("click", () => {
+      url = `/weekly_products/${product.dataset.productid}`;
+      fetch(url, {
+        method: "DELETE",
+        headers: { "Content-type": "application/json" },
+      })
+        .then((response) => {
+          console.log(response.json());
+          response.json();
+        })
+        .then((data) => (window.location.href = data.redirect))
+        .catch((err) => console.log(err));
+    });
+  });
+}
