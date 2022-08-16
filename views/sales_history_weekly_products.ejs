@@ -200,6 +200,7 @@
                   <tr>
                     <th scope="col">Type</th>
                     <th scope="col">Amount</th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -208,8 +209,67 @@
                   <tr>
                     <td><%=misc.misc_name%></td>
                     <td style="width: 35%"><%=misc.amount_formatted%></td>
+                    <td class="px-0 m-0">
+                      <button
+                        type="submit"
+                        class="btn btn-sm d-flex align-items-center"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Hist<%=misc.misc_name.slice(0,2)%><%=misc._id%>"
+                      >
+                        <span class="material-symbols-outlined m-0">
+                          delete
+                        </span>
+                      </button>
+                    </td>
                   </tr>
 
+                  <!-- Delete Expenses Modal -->
+                  <div
+                    class="modal fade"
+                    id="Hist<%=misc.misc_name.slice(0,2)%><%=misc._id%>"
+                    tabindex="-1"
+                    aria-labelledby="Hist<%=misc.misc_name.slice(0,2)%><%=misc._id%>ModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5
+                            class="modal-title"
+                            id="Hist<%=misc.misc_name.slice(0,2)%><%=misc._id%>ModalLabel"
+                          >
+                            Delete Expenses: <%=misc.misc_name.toUpperCase()%>
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          <div
+                            class="alert alert-warning d-flex align-items-center"
+                            role="alert"
+                          >
+                            <span class="material-symbols-outlined me-2">
+                              report </span
+                            ><span>Expenses will be deleted.</span>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-danger HisMiscID"
+                            data-miscid="<%=misc.url%>"
+                            data-salesweekid="<%=weekly_product_sales.url%>"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <%})%>
                 </tbody>
               </table>

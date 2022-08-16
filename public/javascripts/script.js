@@ -78,6 +78,32 @@ function historyDeleteProducts() {
 
 historyDeleteProducts();
 
+function deleteMiscellaneous() {
+  let deleteMisc = document.querySelectorAll("button.miscID");
+  deleteMisc.forEach((misc) => {
+    misc.addEventListener("click", () => {
+      let url = misc.dataset.miscid;
+      let redirect = "/weekly_products";
+      FetchToDelete(url, redirect);
+    });
+  });
+}
+
+deleteMiscellaneous();
+
+function historyDeleteMiscellaneous() {
+  let deleteMisc = document.querySelectorAll("button.HisMiscID");
+  deleteMisc.forEach((misc) => {
+    misc.addEventListener("click", () => {
+      let url = misc.dataset.miscid;
+      let redirect = misc.dataset.salesweekid;
+      FetchToDelete(url, redirect);
+    });
+  });
+}
+
+historyDeleteMiscellaneous();
+
 function FetchToDelete(url, redirect) {
   fetch(url, {
     method: "DELETE",
