@@ -66,8 +66,7 @@
               <thead>
                 <tr>
                   <th scope="col">Name</th>
-                  <th scope="col" class="px-0">Orders</th>
-                  <th scope="col"></th>
+                  <th scope="col">Orders</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -75,25 +74,15 @@
                 <%customers.forEach((customer)=> {%>
                 <tr>
                   <td class="td_description"><%=customer.customer_name%></td>
-                  <td class="px-0"><%=customer.quantity_ordered%></td>
+                  <td><%=customer.quantity_ordered%></td>
 
-                  <td>
+                  <td class="px-0 m-0">
                     <a href="<%=customer.url%>" class="btn btn-sm btn-success"
                       >View Details</a
                     >
                   </td>
-                  <td class="px-0">
-                    <form action="">
-                      <input type="hidden" name="" />
-                      <button
-                        type="submit"
-                        class="btn m-0 btn-sm d-flex align-items-center"
-                      >
-                        <span class="material-symbols-outlined"> delete </span>
-                      </button>
-                    </form>
-                  </td>
                 </tr>
+
                 <%})%>
               </tbody>
             </table>

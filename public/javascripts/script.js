@@ -33,35 +33,56 @@ window.addEventListener("load", () => {
   });
 });
 
-let deleteData = document.querySelector(".customerData");
-if (deleteData) {
-  deleteData.addEventListener("click", () => {
-    url = `/customer/${deleteData.dataset.id}/delete`;
-    fetch(url, {
-      method: "DELETE",
-      headers: { "Content-type": "application/json" },
-    })
-      .then((response) => response.json())
-      .then((data) => (window.location.href = data.redirect))
-      .catch((err) => console.log(err));
-  });
+function deleteCustomers() {
+  let deleteCustomers = document.querySelectorAll("button.customerID");
+  if (deleteCustomers) {
+    deleteCustomers.forEach((customer) => {
+      customer.addEventListener("click", () => {
+        let url = customer.dataset.customerid;
+        let redirect = "";
+        FetchToDelete(url, redirect);
+      });
+    });
+  }
 }
 
-let deleteProducts = document.querySelectorAll("button.productID");
-if (deleteProducts) {
-  deleteProducts.forEach((product) => {
-    product.addEventListener("click", () => {
-      url = `/weekly_products/${product.dataset.productid}`;
-      fetch(url, {
-        method: "DELETE",
-        headers: { "Content-type": "application/json" },
-      })
-        .then((response) => {
-          console.log(response.json());
-          response.json();
-        })
-        .then((data) => (window.location.href = data.redirect))
-        .catch((err) => console.log(err));
+deleteCustomers();
+
+function deleteProducts() {
+  let deleteProducts = document.querySelectorAll("button.productID");
+  if (deleteProducts) {
+    deleteProducts.forEach((product) => {
+      product.addEventListener("click", () => {
+        let url = product.dataset.productid;
+        let redirect = "/weekly_products";
+        FetchToDelete(url, redirect);
+      });
     });
-  });
+  }
+}
+
+deleteProducts();
+
+function historyDeleteProducts() {
+  let deleteProducts = document.querySelectorAll("button.historyproductID");
+  if (deleteProducts) {
+    deleteProducts.forEach((product) => {
+      product.addEventListener("click", () => {
+        let url = product.dataset.productid;
+        let redirect = product.dataset.salesweekid;
+        FetchToDelete(url, redirect);
+      });
+    });
+  }
+}
+
+historyDeleteProducts();
+
+function FetchToDelete(url, redirect) {
+  fetch(url, {
+    method: "DELETE",
+  })
+    .then((response) => response.json())
+    .then((data) => (window.location.href = data.redirect || redirect))
+    .catch((err) => console.log(err));
 }

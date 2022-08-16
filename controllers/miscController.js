@@ -107,3 +107,7 @@ exports.sales_history_add_misc_post = [
     }
   },
 ];
+
+exports.misc_delete = function (req, res, next) {
+  res.send("NOT IMPLEMENTED");
+};

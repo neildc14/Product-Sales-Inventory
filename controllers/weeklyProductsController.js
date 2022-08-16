@@ -121,6 +121,9 @@ exports.weekly_products = function (req, res, next) {
             TotalProductsCapital + TotalMiscellaneousExpenses;
 
           let WeeklyTotalIncome = WeeklyTotalSales - WeeklyProductsCapital;
+          if (WeeklyTotalIncome < 0) {
+            WeeklyTotalIncome = 0;
+          }
 
           res.render("weekly_product_sales", {
             title: "Weekly Sales",
@@ -280,18 +283,24 @@ exports.product_with_customers_delete = function (req, res, next) {
         if (err) {
           return next(err);
         }
-
-        Product.findByIdAndRemove(id).then(() => {
-          customers.forEach((customer) => {
-            Customer.findByIdAndRemove(customer.id)
-              .then((result) => {
-                res.json({ redirect: "/weekly_products" });
-              })
-              .catch((err) => {
-                return next(err);
-              });
-          });
+        customers.forEach((customer) => {
+          Customer.findByIdAndRemove(customer.id)
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((err) => {
+              return next(err);
+            });
         });
+
+        Product.findByIdAndRemove(id)
+          .then((result) => {
+            console.log(result);
+            res.json({ redirect: "" });
+          })
+          .catch((err) => {
+            return next(err);
+          });
       });
   });
 };

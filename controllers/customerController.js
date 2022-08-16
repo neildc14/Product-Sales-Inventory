@@ -105,32 +105,7 @@ exports.customer_ledger_details = function (req, res, next) {
   });
 };
 
-exports.customer_delete_get = function (req, res, next) {
-  Customer.findById(req.params.id).exec(function (err, customer) {
-    if (err) {
-      return next(err);
-    }
-    if (customer === null) {
-      res.redirect("/weekly_products");
-    } else {
-      Product.findById(customer.product_ordered)
-        .sort({ product_name: "asc" })
-        .exec(function (err, product) {
-          if (err) {
-            return next(err);
-          }
-
-          res.render("delete_customer", {
-            title: "Delete Customer",
-            customer: customer,
-            product: product,
-          });
-        });
-    }
-  });
-};
-
-exports.customer_delete_post = function (req, res, next) {
+exports.customer_delete = function (req, res, next) {
   const id = req.params.id;
   Customer.findById(id).exec(function (err, customer) {
     if (err) {
@@ -146,6 +121,7 @@ exports.customer_delete_post = function (req, res, next) {
 
         Customer.findByIdAndRemove(id)
           .then((result) => {
+            console.log(result);
             res.json({ redirect: product.url });
           })
           .catch((err) => {

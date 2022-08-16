@@ -14,6 +14,10 @@ const MiscellaneousSchema = new Schema(
   { timestamps: true }
 );
 
+MiscellaneousSchema.virtual("url").get(function () {
+  return `/weekly_products/expenses/${this._id}`;
+});
+
 MiscellaneousSchema.virtual("amount_formatted").get(function () {
   return `₱${this.amount}.00`;
 });

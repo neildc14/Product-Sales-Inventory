@@ -55,12 +55,61 @@
               <a
                 href="<%=customer.url%>/delete"
                 class="btn btn-sm btn-light d-flex align-items-center ms-3"
+                data-bs-toggle="modal"
+                data-bs-target="#Cust<%=customer.customer_name.slice(0,2)%><%=customer._id%>"
               >
                 <span>Delete</span>
                 <span class="material-symbols-outlined ms-2"> delete </span>
               </a>
             </div>
           </section>
+
+          <!-- Delete Product Modal -->
+          <div
+            class="modal fade"
+            id="Cust<%=customer.customer_name.slice(0,2)%><%=customer._id%>"
+            tabindex="-1"
+            aria-labelledby="Cust<%=customer.customer_name.slice(0,2)%><%=customer._id%>ModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5
+                    class="modal-title"
+                    id="Cust<%=customer.customer_name.slice(0,2)%><%=customer._id%>ModalLabel"
+                  >
+                    Delete Customer: <%=customer.customer_name.toUpperCase()%>
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <div
+                    class="alert alert-warning d-flex align-items-center"
+                    role="alert"
+                  >
+                    <span class="material-symbols-outlined me-2"> report </span
+                    ><span>Customer will be deleted.</span>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-danger customerID"
+                    data-customerid="<%customer.url%>"
+                    data-productid="customer.product_ordered"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </main>

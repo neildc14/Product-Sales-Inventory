@@ -6,6 +6,13 @@
       <div class="container-fluid mx-0 px-0">
         <%-include('./partials/nav')%>
         <div class="container">
+          <button
+            onclick="window.history.back()"
+            class="btn border border-2 border-light d-flex align-items-center back_button me-auto"
+          >
+            <span class="material-symbols-outlined me-2"> arrow_back_ios </span>
+            <span>Go Back</span>
+          </button>
           <div class="mt-5">
             <h5 class="bg-primary text-white p-1">
               <span>Name: </span><%=customer.customer_name%>
@@ -51,6 +58,7 @@
                 type="submit"
                 class="btn btn-danger customerData"
                 data-id="<%=customer._id%>"
+                data-producturl="<%=product.url%>"
               >
                 Delete
               </button>

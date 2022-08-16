@@ -77,7 +77,7 @@
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th scope="col">Product</th>
+                  <th scope="col">Product Type</th>
                   <th scope="col" class="px-0">Orders</th>
                   <th scope="col" class="px-0"></th>
                   <th scope="col"></th>
@@ -113,12 +113,12 @@
                       </button>
                     </form>
                   </td>
-                  <td class="px-0" class="m-0">
+                  <td class="px-0 m-0">
                     <button
                       type="submit"
                       class="btn btn-sm d-flex align-items-center"
                       data-bs-toggle="modal"
-                      data-bs-target="#<%=product.product_name.slice(0,2)%><%=product._id%>"
+                      data-bs-target="#Prod<%=product.product_name.slice(0,2)%><%=product._id%>"
                     >
                       <span class="material-symbols-outlined m-0">
                         delete
@@ -130,9 +130,9 @@
                 <!-- Delete Product Modal -->
                 <div
                   class="modal fade"
-                  id="<%=product.product_name.slice(0,2)%><%=product._id%>"
+                  id="Prod<%=product.product_name.slice(0,2)%><%=product._id%>"
                   tabindex="-1"
-                  aria-labelledby="<%=product.product_name.slice(0,2)%><%=product._id%>ModalLabel"
+                  aria-labelledby="Prod<%=product.product_name.slice(0,2)%><%=product._id%>ModalLabel"
                   aria-hidden="true"
                 >
                   <div class="modal-dialog modal-dialog-centered">
@@ -140,7 +140,7 @@
                       <div class="modal-header">
                         <h5
                           class="modal-title"
-                          id="<%=product.product_name.slice(0,2)%><%=product._id%>ModalLabel"
+                          id="Prod<%=product.product_name.slice(0,2)%><%=product._id%>ModalLabel"
                         >
                           Delete Product:
                           <%=product.product_name.toUpperCase()%>
@@ -168,7 +168,8 @@
                         <button
                           type="button"
                           class="btn btn-danger productID"
-                          data-productID="<%=product._id%>"
+                          data-productid="<%=product.url%>"
+                          data-salesweekid="<%=weekly_product_sales.url%>"
                         >
                           Delete
                         </button>
@@ -199,8 +200,9 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">Type</th>
-                    <th scope="col">Amount</th>
+                    <th scope="col" class="td_description">Type</th>
+                    <th scope="col" class="px-0 m-0">Amount</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -208,12 +210,71 @@
 
                   <tr>
                     <td><%=misc.misc_name%></td>
-                    <td><%=misc.amount_formatted%></td>
+                    <td class="px-0 m-0"><%=misc.amount_formatted%></td>
+                    <td class="px-0 m-0">
+                      <button
+                        type="submit"
+                        class="btn btn-sm d-flex align-items-center"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Misc<%=misc.misc_name.slice(0,2)%><%=misc._id%>"
+                      >
+                        <span class="material-symbols-outlined m-0">
+                          delete
+                        </span>
+                      </button>
+                    </td>
                   </tr>
-
+                  <!-- Delete Expenses Modal -->
+                  <div
+                    class="modal fade"
+                    id="Misc<%=misc.misc_name.slice(0,2)%><%=misc._id%>"
+                    tabindex="-1"
+                    aria-labelledby="Misc<%=misc.misc_name.slice(0,2)%><%=misc._id%>ModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5
+                            class="modal-title"
+                            id="Misc<%=misc.misc_name.slice(0,2)%><%=misc._id%>ModalLabel"
+                          >
+                            Delete Expenses: <%=misc.misc_name.toUpperCase()%>
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          <div
+                            class="alert alert-warning d-flex align-items-center"
+                            role="alert"
+                          >
+                            <span class="material-symbols-outlined me-2">
+                              report </span
+                            ><span>Expenses will be deleted.</span>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-danger miscID"
+                            data-miscid="<%=misc.url%>"
+                            data-salesweekid="<%=weekly_product_sales.url%>"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <%})%>
                 </tbody>
               </table>
+
               <%}%>
             </section>
           </div>
@@ -318,6 +379,7 @@
                         id="original_price"
                         autocomplete="off"
                         value="<%=product_reset !== undefined ? product_reset.original_price : ''%>"
+                        required
                       />
                     </div>
                     <div class="form-group pb-2">

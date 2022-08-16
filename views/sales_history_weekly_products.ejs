@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <%-include('./partials/head')%>
+
   <body>
     <main>
       <div class="weekly_product_sales_container container-fluid mx-0 px-0">
@@ -60,34 +61,36 @@
           </button>
           <h5 class="bg-danger text-white p-1">Products</h5>
           <section class="products_container" id="products_container">
+            <%if(products.length <=0){%>
+
+            <div
+              class="alert alert-warning d-flex align-items-center"
+              role="alert"
+            >
+              <span class="material-symbols-outlined me-2"> report </span
+              ><span>No Products Available.</span>
+            </div>
+
+            <%} else{%>
             <table class="table table-striped">
               <thead>
                 <tr>
-                  <th scope="col">Product</th>
+                  <th scope="col">Product Type</th>
                   <th scope="col" class="px-0">Orders</th>
                   <th scope="col" class="px-0"></th>
+                  <th scope="col"></th>
                   <th scope="col"></th>
                 </tr>
               </thead>
               <tbody>
-                <%if(products.length <= 0){%>
-                <tr>
-                  <div
-                    class="alert alert-warning d-flex align-items-center"
-                    role="alert"
-                  >
-                    <span class="material-symbols-outlined me-2"> report </span
-                    ><span>No Products Available.</span>
-                  </div>
-                </tr>
-                <%}%> <%products.forEach((product)=>{ const quantity_arr = [];%>
+                <%products.forEach((product)=>{ const quantity_arr = [];%>
 
                 <tr>
                   <td class="td_description"><%=product.product_name%></td>
                   <%customers.forEach((customer)=>{%>
-                  <%if(String(customer.product_ordered) === String(product._id))
-                  { quantity_arr.push(customer.quantity_ordered)%> <%}%> <%})%>
-                  <%let sum = 0; quantity_arr.forEach(x => sum += Number(x))%>
+                  <%if(String(customer.product_ordered)===String(product._id)) {
+                  quantity_arr.push(customer.quantity_ordered)%> <%}%> <%})%>
+                  <%let sum=0; quantity_arr.forEach(x=> sum += Number(x))%>
                   <td class="px-0"><%=sum%></td>
                   <td class="px-0">
                     <a href="<%=product.url%>" class="btn btn-sm btn-success"
@@ -103,21 +106,84 @@
                         class="btn btn-sm d-flex align-items-center"
                       >
                         <span class="material-symbols-outlined m-0">
-                          delete
+                          border_color
                         </span>
                       </button>
                     </form>
                   </td>
+                  <td class="px-0 m-0">
+                    <button
+                      type="submit"
+                      class="btn btn-sm d-flex align-items-center"
+                      data-bs-toggle="modal"
+                      data-bs-target="#Hist<%=product.product_name.slice(0,2)%><%=product._id%>"
+                    >
+                      <span class="material-symbols-outlined m-0">
+                        delete
+                      </span>
+                    </button>
+                  </td>
                 </tr>
+                <!-- Delete Product Modal -->
+                <div
+                  class="modal fade"
+                  id="Hist<%=product.product_name.slice(0,2)%><%=product._id%>"
+                  tabindex="-1"
+                  aria-labelledby="Hist<%=product.product_name.slice(0,2)%><%=product._id%>ModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5
+                          class="modal-title"
+                          id="Hist<%=product.product_name.slice(0,2)%><%=product._id%>ModalLabel"
+                        >
+                          Delete Product:
+                          <%=product.product_name.toUpperCase()%>
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">
+                        <div
+                          class="alert alert-warning d-flex align-items-center"
+                          role="alert"
+                        >
+                          <span class="material-symbols-outlined me-2">
+                            report </span
+                          ><span
+                            >Product and its customers will be deleted.</span
+                          >
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-danger historyproductID"
+                          data-productid="<%=product.url%>"
+                          data-salesweekid="<%=weekly_product_sales.url%>"
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
                 <%})%>
               </tbody>
             </table>
+            <%}%>
           </section>
           <div class="my-4">
             <h5 class="bg-danger text-white p-1">Expenses</h5>
             <section class="products_container" id="expenses_container">
-              <%if(miscellaneous.length <= 0){%>
+              <%if(miscellaneous.length <=0){%>
 
               <div
                 class="alert alert-warning d-flex align-items-center"
@@ -165,19 +231,22 @@
                   <tr>
                     <th scope="row">Total Capital:</th>
                     <td>
-                      <span>₱</span><%=weekly_total_capital%> <span>.00</span>
+                      <span>₱</span>
+                      <%=weekly_total_capital%> <span>.00</span>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row">Total Sales:</th>
                     <td>
-                      <span>₱</span><%=weekly_total_sales%> <span>.00</span>
+                      <span>₱</span>
+                      <%=weekly_total_sales%> <span>.00</span>
                     </td>
                   </tr>
                   <tr>
                     <th scope="row" class="table-active">Total Revenue:</th>
                     <td class="table-active">
-                      <span>₱</span><%=weekly_total_income%>
+                      <span>₱</span>
+                      <%=weekly_total_income%>
                       <span>.00</span>
                     </td>
                   </tr>
@@ -252,6 +321,7 @@
                         id="original_price"
                         autocomplete="off"
                         value="<%=product_reset !== undefined ? product_reset.original_price : ''%>"
+                        required
                       />
                     </div>
                     <div class="form-group pb-2">
