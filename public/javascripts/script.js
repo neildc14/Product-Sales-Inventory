@@ -104,6 +104,19 @@ function historyDeleteMiscellaneous() {
 
 historyDeleteMiscellaneous();
 
+function deleteSalesWeek() {
+  let deleteSalesWeek = document.querySelectorAll("button.salesweekID");
+  deleteSalesWeek.forEach((week) => {
+    week.addEventListener("click", () => {
+      let url = week.dataset.salesweekid;
+      let redirect = "/sales_history";
+      FetchToDelete(url, redirect);
+    });
+  });
+}
+
+deleteSalesWeek();
+
 function FetchToDelete(url, redirect) {
   fetch(url, {
     method: "DELETE",

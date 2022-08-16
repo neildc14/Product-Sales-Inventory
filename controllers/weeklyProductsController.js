@@ -271,36 +271,68 @@ exports.weekly_products_details = function (req, res, next) {
     });
 };
 
-exports.product_with_customers_delete = function (req, res, next) {
+exports.weekly_products_delete = function (req, res, next) {
   const id = req.params.id;
-  Product.findById(id).exec(function (err, product) {
-    if (err) {
-      return next(err);
-    }
-    Customer.find({ product_ordered: product._id })
-      .sort({ customer_name: "asc" })
-      .exec(function (err, customers) {
-        if (err) {
-          return next(err);
-        }
-        customers.forEach((customer) => {
-          Customer.findByIdAndRemove(customer.id)
+  WeeklyProducts.findById(id)
+    .sort({ createdAt: "desc" })
+    .exec(function (err, result) {
+      if (err) {
+        return next(err);
+      }
+      if (result === null) {
+        var err = new Error("Weekly Sales Product not found");
+        err.status = 404;
+        return next(err);
+      }
+      async
+        .parallel({
+          product: function (callback) {
+            Product.find({ weekly_product: result._id })
+              .sort({ product_name: "asc" })
+              .exec(callback);
+          },
+          miscellaneous: function (callback) {
+            Miscellaneous.find({ weekly_product_misc: result._id })
+              .sort({ product_name: "asc" })
+              .exec(callback);
+          },
+          customer: function (callback) {
+            Customer.find({ weekly_product: result._id })
+              .sort({ createdAt: "asc" })
+              .exec(callback);
+          },
+        })
+        .then(function (asyncresults) {
+          const products = asyncresults.product;
+          const miscellaneous = asyncresults.miscellaneous;
+          const customers = asyncresults.customer;
+
+          products.forEach((product) => {
+            Product.findByIdAndRemove(product._id).catch((err) => {
+              return next(err);
+            });
+          });
+
+          miscellaneous.forEach((misc) => {
+            Miscellaneous.findByIdAndRemove(misc._id).catch((err) => {
+              return next(err);
+            });
+          });
+
+          customers.forEach((customer) => {
+            Customer.findByIdAndRemove(customer._id).catch((err) => {
+              return next(err);
+            });
+          });
+
+          WeeklyProducts.findByIdAndRemove(id)
             .then((result) => {
               console.log(result);
+              res.json({ redirect: "/sales_history" });
             })
             .catch((err) => {
               return next(err);
             });
         });
-
-        Product.findByIdAndRemove(id)
-          .then((result) => {
-            console.log(result);
-            res.json({ redirect: "" });
-          })
-          .catch((err) => {
-            return next(err);
-          });
-      });
-  });
+    });
 };

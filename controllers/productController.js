@@ -161,3 +161,37 @@ exports.sales_history_add_product_post = [
     }
   },
 ];
+
+exports.product_with_customers_delete = function (req, res, next) {
+  const id = req.params.id;
+  Product.findById(id).exec(function (err, product) {
+    if (err) {
+      return next(err);
+    }
+    Customer.find({ product_ordered: product._id })
+      .sort({ customer_name: "asc" })
+      .exec(function (err, customers) {
+        if (err) {
+          return next(err);
+        }
+        customers.forEach((customer) => {
+          Customer.findByIdAndRemove(customer.id)
+            .then((result) => {
+              console.log(result);
+            })
+            .catch((err) => {
+              return next(err);
+            });
+        });
+
+        Product.findByIdAndRemove(id)
+          .then((result) => {
+            console.log(result);
+            res.json({ redirect: "" });
+          })
+          .catch((err) => {
+            return next(err);
+          });
+      });
+  });
+};

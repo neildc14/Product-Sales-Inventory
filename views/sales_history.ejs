@@ -19,11 +19,23 @@
               <span>Sales History</span>
             </h5>
             <section>
+              <%if(all_weekly_product_sales <= 0) {%>
+
+              <div
+                class="alert alert-warning d-flex align-items-center"
+                role="alert"
+              >
+                <span class="material-symbols-outlined me-2"> report </span
+                ><span>No Products Available.</span>
+              </div>
+
+              <%} else{%>
               <table class="table table-striped">
                 <thead>
                   <tr>
                     <th scope="col">Week</th>
-                    <th scope="col"></th>
+                    <th scope="col" class="px-0 m-0"></th>
+                    <th scope="col" class="px-0 m-0"></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -34,17 +46,76 @@
                       <%=weekly_product_sales.date_start_formatted%> -
                       <%=weekly_product_sales.date_end_formatted%>
                     </td>
-                    <td>
+                    <td class="px-0 m-0">
                       <a
                         href="<%=weekly_product_sales.url%>"
                         class="btn btn-sm btn-success"
                         >View Week</a
                       >
                     </td>
+                    <td class="px-0 m-0">
+                      <button
+                        type="submit"
+                        class="btn btn-sm d-flex align-items-center"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Week<%=weekly_product_sales._id%>"
+                      >
+                        <span class="material-symbols-outlined m-0">
+                          delete
+                        </span>
+                      </button>
+                    </td>
                   </tr>
+                  <!-- Delete Product Modal -->
+                  <div
+                    class="modal fade"
+                    id="Week<%=weekly_product_sales._id%>"
+                    tabindex="-1"
+                    aria-labelledby="Week<%=weekly_product_sales._id%>ModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5
+                            class="modal-title"
+                            id="Week<%=weekly_product_sales._id%>ModalLabel"
+                          >
+                            Delete Weekly Sales: <%=weekly_product_sales._id%>
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <div class="modal-body">
+                          <div
+                            class="alert alert-warning d-flex align-items-center"
+                            role="alert"
+                          >
+                            <span class="material-symbols-outlined me-2">
+                              report </span
+                            ><span>Sales week will be deleted.</span>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button
+                            type="button"
+                            class="btn btn-danger salesweekID"
+                            data-salesweekid="<%=weekly_product_sales.url%>"
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <%})%>
                 </tbody>
               </table>
+              <%}%>
             </section>
           </div>
         </div>
