@@ -33,52 +33,34 @@ window.addEventListener("load", () => {
   });
 });
 
-function deleteCustomers() {
+(function deleteCustomers() {
   let deleteCustomers = document.querySelectorAll("button.customerID");
-  if (deleteCustomers) {
-    deleteCustomers.forEach((customer) => {
-      customer.addEventListener("click", () => {
-        let url = customer.dataset.customerid;
-        let redirect = "";
-        FetchToDelete(url, redirect);
-      });
+  deleteCustomers.forEach((customer) => {
+    customer.addEventListener("click", () => {
+      let url = customer.dataset.customerid;
+      let redirect = "";
+      FetchToDelete(url, redirect);
     });
-  }
-}
-
-deleteCustomers();
-
-function deleteProducts() {
+  });
+})()(function deleteProducts() {
   let deleteProducts = document.querySelectorAll("button.productID");
-  if (deleteProducts) {
-    deleteProducts.forEach((product) => {
-      product.addEventListener("click", () => {
-        let url = product.dataset.productid;
-        let redirect = "/weekly_products";
-        FetchToDelete(url, redirect);
-      });
+  deleteProducts.forEach((product) => {
+    product.addEventListener("click", () => {
+      let url = product.dataset.productid;
+      let redirect = "/weekly_products";
+      FetchToDelete(url, redirect);
     });
-  }
-}
-
-deleteProducts();
-
-function historyDeleteProducts() {
+  });
+})()(function historyDeleteProducts() {
   let deleteProducts = document.querySelectorAll("button.historyproductID");
-  if (deleteProducts) {
-    deleteProducts.forEach((product) => {
-      product.addEventListener("click", () => {
-        let url = product.dataset.productid;
-        let redirect = product.dataset.salesweekid;
-        FetchToDelete(url, redirect);
-      });
+  deleteProducts.forEach((product) => {
+    product.addEventListener("click", () => {
+      let url = product.dataset.productid;
+      let redirect = product.dataset.salesweekid;
+      FetchToDelete(url, redirect);
     });
-  }
-}
-
-historyDeleteProducts();
-
-function deleteMiscellaneous() {
+  });
+})()(function deleteMiscellaneous() {
   let deleteMisc = document.querySelectorAll("button.miscID");
   deleteMisc.forEach((misc) => {
     misc.addEventListener("click", () => {
@@ -87,11 +69,7 @@ function deleteMiscellaneous() {
       FetchToDelete(url, redirect);
     });
   });
-}
-
-deleteMiscellaneous();
-
-function historyDeleteMiscellaneous() {
+})()(function historyDeleteMiscellaneous() {
   let deleteMisc = document.querySelectorAll("button.HisMiscID");
   deleteMisc.forEach((misc) => {
     misc.addEventListener("click", () => {
@@ -100,11 +78,7 @@ function historyDeleteMiscellaneous() {
       FetchToDelete(url, redirect);
     });
   });
-}
-
-historyDeleteMiscellaneous();
-
-function deleteSalesWeek() {
+})()(function deleteSalesWeek() {
   let deleteSalesWeek = document.querySelectorAll("button.salesweekID");
   deleteSalesWeek.forEach((week) => {
     week.addEventListener("click", () => {
@@ -113,9 +87,7 @@ function deleteSalesWeek() {
       FetchToDelete(url, redirect);
     });
   });
-}
-
-deleteSalesWeek();
+})();
 
 function FetchToDelete(url, redirect) {
   fetch(url, {

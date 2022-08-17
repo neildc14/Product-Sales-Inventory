@@ -48,10 +48,9 @@ exports.weekly_products = function (req, res, next) {
       if (err) {
         return next(err);
       }
-      if (results === null) {
-        var err = new Error("Weekly Sales Product not found");
-        err.status = 404;
-        return next(err);
+      if (results.length <= 0) {
+        res.render("no_Weekly_sales", { title: "No Week Sales" });
+        return;
       }
       async
         .parallel({
