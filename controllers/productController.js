@@ -139,6 +139,7 @@ exports.sales_history_add_product_post = [
         title: "Add Product",
         errors: errors.array(),
         product: req.body,
+        customer_reset: req.body,
       });
       console.log(errors.array());
       return;

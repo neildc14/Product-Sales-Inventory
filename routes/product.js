@@ -38,6 +38,7 @@ router.post("/weekly_products/:id", customerController.add_customer_post);
 //customer
 router.get("/customer/:id", customerController.customer_details);
 router.delete("/customer/:id", customerController.customer_delete);
+router.put("/customer/:id", customerController.customer_put);
 
 //sales history and post product
 router.get("/sales_history", weeklyProductsController.sales_history);
@@ -67,4 +68,3 @@ router.get("/customer_ledger", customerController.customer_ledger);
 router.get("/customer_ledger/:id", customerController.customer_ledger_details);
 
 module.exports = router;
- 
