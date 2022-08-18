@@ -97,19 +97,17 @@
                       >View Product</a
                     >
                   </td>
-
-                  <td class="px-0" class="m-0">
-                    <form action="" class="m-0">
-                      <input type="hidden" name="" />
-                      <button
-                        type="submit"
-                        class="btn btn-sm d-flex align-items-center"
-                      >
-                        <span class="material-symbols-outlined m-0">
-                          border_color
-                        </span>
-                      </button>
-                    </form>
+                  <td class="px-0 m-0">
+                    <button
+                      type="submit"
+                      class="btn btn-sm d-flex align-items-center"
+                      data-bs-toggle="modal"
+                      data-bs-target="#Edit<%=product.product_name.slice(0,2)%><%=product._id%>"
+                    >
+                      <span class="material-symbols-outlined m-0">
+                        edit_note
+                      </span>
+                    </button>
                   </td>
                   <td class="px-0 m-0">
                     <button
@@ -175,6 +173,112 @@
                   </div>
                 </div>
 
+                <!--Edit ProductModal -->
+                <div
+                  class="modal fade"
+                  id="Edit<%=product.product_name.slice(0,2)%><%=product._id%>"
+                  tabindex="-1"
+                  aria-labelledby="Edit<%=product.product_name.slice(0,2)%><%=product._id%>Label"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5
+                          class="modal-title"
+                          id="Edit<%=product.product_name.slice(0,2)%><%=product._id%>ModalLabel"
+                        >
+                          Edit Product
+                        </h5>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <form
+                        name="productEditForm"
+                        data-productid="<%=product._id%>"
+                        data-redirect="<%=weekly_product_sales.url%>"
+                      >
+                        <div class="modal-body">
+                          <div class="form-group pb-2">
+                            <input
+                              type="hidden"
+                              name="weekly_product"
+                              id="weekly_product"
+                              value="<%=weekly_product_sales._id%>"
+                            />
+                          </div>
+                          <div class="form-group pb-2">
+                            <label for="product_name" class="pb-1"
+                              >Product Name:</label
+                            >
+                            <input
+                              type="text"
+                              class="form-control"
+                              name="product_name"
+                              id="product_name"
+                              required="true"
+                              autocomplete="off"
+                              value="<%=product.product_name%>"
+                            />
+                          </div>
+                          <div class="form-group pb-2">
+                            <label for="quantity" class="pb-1"
+                              >Quantity(if limited):</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="quantity"
+                              id="quantity"
+                              autocomplete="off"
+                              value="<%=product.quantity%>"
+                            />
+                          </div>
+                          <div class="form-group pb-2">
+                            <label for="original_price" class="pb-1"
+                              >Original Price:</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="original_price"
+                              id="original_price"
+                              autocomplete="off"
+                              value="<%=product.original_price%>"
+                              required
+                            />
+                          </div>
+                          <div class="form-group pb-2">
+                            <label for="selling_price" class="pb-1">
+                              Selling Price:</label
+                            >
+                            <input
+                              type="number"
+                              class="form-control"
+                              name="selling_price"
+                              id="selling_price"
+                              required="true"
+                              autocomplete="off"
+                              value="<%=product.selling_price %>"
+                            />
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="reset" class="btn bg-light">
+                            Reset
+                          </button>
+                          <button type="submit" class="btn btn-primary">
+                            Save Update
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
                 <%})%>
               </tbody>
             </table>

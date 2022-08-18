@@ -132,14 +132,13 @@ exports.customer_delete = function (req, res, next) {
 };
 
 exports.customer_put = function (req, res, next) {
-  let customer = req.body["data"];
+  let updated_customer = req.body.updatedData;
 
-  Customer.findByIdAndUpdate(req.params.id, customer, {})
+  Customer.findByIdAndUpdate(req.params.id, updated_customer, {})
     .then((data) => {
-      console.log(data);
       res.json({ redirect: "" });
     })
     .catch((err) => {
-      console.log(err);
+      return next(err);
     });
 };

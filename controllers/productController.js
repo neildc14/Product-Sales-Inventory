@@ -196,3 +196,14 @@ exports.product_with_customers_delete = function (req, res, next) {
       });
   });
 };
+
+exports.product_put = function (req, res, next) {
+  const updated_product = req.body.updatedData;
+  Product.findByIdAndUpdate(req.params.id, updated_product, {})
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      return next(err);
+    });
+};

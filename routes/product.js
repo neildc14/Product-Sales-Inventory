@@ -25,6 +25,7 @@ router.delete(
   "/weekly_products/:id",
   productController.product_with_customers_delete
 );
+router.put("/weekly_products/:id", productController.product_put);
 
 //add miscellaneous
 router.get("/weekly_products/add_expenses", miscController.add_misc_get);
@@ -54,6 +55,8 @@ router.post(
   "/sales_history/:id",
   productController.sales_history_add_product_post
 );
+router.put("/sales_history/:id", weeklyProductsController.sales_history_put);
+
 router.get(
   "/sales_history/:id/add_expenses",
   miscController.sales_history_add_misc_get

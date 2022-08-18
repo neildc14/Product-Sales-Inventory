@@ -335,3 +335,15 @@ exports.weekly_products_delete = function (req, res, next) {
         });
     });
 };
+
+exports.sales_history_put = function (req, res, next) {
+  const updated_weekly_sales = req.body.updatedData;
+  console.log(updated_weekly_sales);
+  WeeklyProducts.findByIdAndUpdate(req.params.id, updated_weekly_sales, {})
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      return next(err);
+    });
+};
