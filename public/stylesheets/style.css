@@ -181,6 +181,17 @@ td {
   padding-right: 1rem !important;
 }
 
+.user_form {
+  position: relative;
+  top: 20vh !important;
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.user_form button[type="submit"] {
+  width: 100%;
+}
+
 @media (min-width: 520px) {
   .td_description {
     width: 65%;
@@ -195,15 +206,6 @@ td {
   .container {
     max-width: 60% !important;
   }
-
-  /* .index_container {
-    max-width: 70% !important;
-  }
-
-  .dashboard_list,
-  .dashboard_panel .card {
-    max-width: 30%;
-  } */
 
   .top_nav {
     top: 13vh;

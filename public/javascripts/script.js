@@ -245,3 +245,21 @@ const FetchToEdit = (url, updatedData, redirect) => {
       console.log(err);
     });
 };
+
+function matchPassword() {
+  let registerForm = document.querySelector('[name="registerForm"]');
+  let initial_password = registerForm["initial_password"];
+  let validated_password = registerForm["validated_password"];
+  if (initial_password.value !== validated_password.value) {
+    validated_password.classList.add("is-invalid");
+    return false;
+  }
+}
+
+if (validated_password) {
+  validated_password.addEventListener("input", () => {
+    if (validated_password.classList.contains("is-invalid")) {
+      validated_password.classList.remove("is-invalid");
+    }
+  });
+}
