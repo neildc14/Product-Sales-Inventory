@@ -31,6 +31,7 @@ router.put("/weekly_products/:id", productController.product_put);
 router.get("/weekly_products/add_expenses", miscController.add_misc_get);
 router.post("/weekly_products/add_expenses", miscController.add_misc_post);
 router.delete("/weekly_products/expenses/:id", miscController.misc_delete);
+router.put("/weekly_products/expenses/:id", miscController.misc_put);
 
 //view product and post product
 router.get("/weekly_products/:id", productController.product_details);

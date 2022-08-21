@@ -68,6 +68,7 @@ exports.sales_history_add_misc_get = function (req, res, next) {
         title: "Add Expenses",
         weekly_product_sales: results,
         errors: null,
+        misc_reset: undefined,
       });
     });
 };
@@ -85,6 +86,7 @@ exports.sales_history_add_misc_post = [
         title: "Add Expenses",
         weekly_product_sales: results[0],
         errors: errors.array(),
+        misc_reset: req.body,
       });
       console.log(errors.array());
       return;
@@ -114,6 +116,18 @@ exports.misc_delete = function (req, res, next) {
     .then(function (result) {
       console.log(result);
       res.json({ redirect: "" });
+    })
+    .catch((err) => {
+      return next(err);
+    });
+};
+
+exports.misc_put = function (req, res, next) {
+  const updated_expenses = req.body.updatedData;
+  console.log(updated_expenses);
+  Miscellaneous.findByIdAndUpdate(req.params.id, updated_expenses, {})
+    .then((data) => {
+      console.log(data);
     })
     .catch((err) => {
       return next(err);

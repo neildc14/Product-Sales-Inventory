@@ -283,6 +283,7 @@
                     </div>
                   </div>
                 </div>
+
                 <%})%>
               </tbody>
             </table>
@@ -308,6 +309,7 @@
                     <th scope="col" class="td_description">Type</th>
                     <th scope="col" class="px-0 m-0">Amount</th>
                     <th></th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -316,6 +318,18 @@
                   <tr>
                     <td><%=misc.misc_name%></td>
                     <td class="px-0 m-0"><%=misc.amount_formatted%></td>
+                    <td class="px-0 m-0">
+                      <button
+                        type="submit"
+                        class="btn btn-sm d-flex align-items-center"
+                        data-bs-toggle="modal"
+                        data-bs-target="#Edit<%=misc.misc_name.slice(0,2)%><%=misc._id%>"
+                      >
+                        <span class="material-symbols-outlined m-0">
+                          edit_note
+                        </span>
+                      </button>
+                    </td>
                     <td class="px-0 m-0">
                       <button
                         type="submit"
@@ -376,7 +390,80 @@
                       </div>
                     </div>
                   </div>
-
+                  <!--Edit expensesModal -->
+                  <div
+                    class="modal fade"
+                    id="Edit<%=misc.misc_name.slice(0,2)%><%=misc._id%>"
+                    tabindex="-1"
+                    aria-labelledby="Edit<%=misc.misc_name.slice(0,2)%><%=misc._id%>ModalLabel"
+                    aria-hidden="true"
+                  >
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5
+                            class="modal-title"
+                            id="Edit<%=misc.misc_name.slice(0,2)%><%=misc._id%>ModalLabel"
+                          >
+                            Edit Expenses
+                          </h5>
+                          <button
+                            type="button"
+                            class="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"
+                          ></button>
+                        </div>
+                        <form
+                          name="expensesEditForm"
+                          data-miscurl="<%=misc.url%>"
+                          data-miscid="<%=misc._id%>"
+                        >
+                          <div class="modal-body">
+                            <div class="form-group pb-2">
+                              <input
+                                type="hidden"
+                                name="weekly_product_misc"
+                                id="weekly_product_misc"
+                                value="<%=weekly_product_sales._id%>"
+                              />
+                            </div>
+                            <div class="form-group pb-2">
+                              <label for="misc_name" class="pb-1">Type:</label>
+                              <input
+                                type="text"
+                                class="form-control"
+                                name="misc_name"
+                                id="misc_name"
+                                required="true"
+                                autocomplete="off"
+                                value="<%=misc.misc_name%>"
+                              />
+                            </div>
+                            <div class="form-group pb-2">
+                              <label for="amount" class="pb-1">Amount:</label>
+                              <input
+                                type="number"
+                                class="form-control"
+                                name="amount"
+                                id="amount"
+                                required="true"
+                                autocomplete="off"
+                                value="<%=misc.amount%>"
+                              />
+                            </div>
+                          <div class="modal-footer">
+                            <button type="reset" class="btn bg-light">
+                              Reset
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                              Save Update
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
                   <%})%>
                 </tbody>
               </table>
