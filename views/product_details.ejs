@@ -33,15 +33,17 @@
             <table class="table border">
               <tbody>
                 <tr>
-                  <th scope="row">Quantity</th>
+                  <th scope="row" class="td_description">Quantity</th>
                   <td><%=product.quantity%></td>
                 </tr>
                 <tr>
-                  <th scope="row">Original Price</th>
+                  <th scope="row" class="td_description">Original Price</th>
                   <td><%=product.original_price_formatted%></td>
                 </tr>
                 <tr>
-                  <th scope="row" class="table-active">Selling Price</th>
+                  <th scope="row" class="table-active td_description">
+                    Selling Price
+                  </th>
                   <td class="table-active">
                     <%=product.selling_price_formatted%>
                   </td>
@@ -74,7 +76,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Name</th>
+                  <th scope="col" class="td_description">Name</th>
                   <th scope="col">Orders</th>
                   <th scope="col"></th>
                 </tr>
@@ -83,11 +85,15 @@
                 <%customers.forEach((customer)=> {%>
                 <tr>
                   <td class="td_description"><%=customer.customer_name%></td>
-                  <td><%=customer.quantity_ordered%></td>
+                  <td style="width: auto"><%=customer.quantity_ordered%></td>
 
-                  <td class="px-0 m-0">
-                    <a href="<%=customer.url%>" class="btn btn-sm btn-success"
-                      >View Details</a
+                  <td style="width: 3%">
+                    <a
+                      href="<%=customer.url%>"
+                      class="btn btn-sm btn-success bg-gradient d-flex align-items-center justify-content-between"
+                      ><span class="material-symbols-outlined me-1">
+                        pageview</span
+                      ><span>View</span></a
                     >
                   </td>
                 </tr>

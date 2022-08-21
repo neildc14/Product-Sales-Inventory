@@ -32,7 +32,7 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">Customer Name</th>
+                    <th scope="col" class="td_description">Customer Name</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -40,9 +40,13 @@
                   <%customers.forEach((customer)=> {%>
                   <tr>
                     <td class="td_description"><%=customer.customer_name%></td>
-                    <td class="px-0">
-                      <a href="<%=customer.url%>" class="btn btn-sm btn-success"
-                        >View Customer</a
+                    <td style="width: 3%">
+                      <a
+                        href="<%=customer.url%>"
+                        class="btn btn-sm btn-success bg-gradient d-flex align-items-center justify-content-between"
+                        ><span class="material-symbols-outlined me-1">
+                          pageview</span
+                        ><span>View</span></a
                       >
                     </td>
                   </tr>

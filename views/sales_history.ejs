@@ -42,28 +42,30 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">Week</th>
-                    <th scope="col" class="px-0 m-0"></th>
-                    <th scope="col" class="px-0 m-0"></th>
-                    <th scope="col" class="px-0 m-0"></th>
+                    <th scope="col" class="td_description">Week</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
                   </tr>
                 </thead>
                 <tbody>
                   <%all_weekly_product_sales.forEach((weekly_product_sales)=>
                   {%>
                   <tr>
-                    <td>
+                    <td class="td_description">
                       <%=weekly_product_sales.date_start_formatted%> -
                       <%=weekly_product_sales.date_end_formatted%>
                     </td>
-                    <td class="px-0 m-0">
+                    <td style="width: 3%">
                       <a
                         href="<%=weekly_product_sales.url%>"
-                        class="btn btn-sm btn-success"
-                        >View Week</a
+                        class="btn btn-sm btn-success bg-gradient d-flex align-items-center justify-content-between"
+                        ><span class="material-symbols-outlined me-1">
+                          pageview</span
+                        ><span>View</span></a
                       >
                     </td>
-                    <td class="px-0 m-0">
+                    <td class="px-0 m-0" style="width: 5%">
                       <button
                         type="submit"
                         class="btn btn-sm d-flex align-items-center"
@@ -75,7 +77,7 @@
                         </span>
                       </button>
                     </td>
-                    <td class="px-0 m-0">
+                    <td class="px-0 m-0" style="width: 5%">
                       <button
                         type="submit"
                         class="btn btn-sm d-flex align-items-center"

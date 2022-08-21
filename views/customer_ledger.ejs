@@ -32,7 +32,7 @@
               <table class="table table-striped">
                 <thead>
                   <tr>
-                    <th scope="col">Week</th>
+                    <th scope="col" class="td_description">Week</th>
                     <th scope="col"></th>
                   </tr>
                 </thead>
@@ -40,15 +40,17 @@
                   <%all_weekly_product_sales.forEach((weekly_product_sales)=>
                   {%>
                   <tr>
-                    <td>
+                    <td class="td_description">
                       <%=weekly_product_sales.date_start_formatted%> -
                       <%=weekly_product_sales.date_end_formatted%>
                     </td>
-                    <td>
+                    <td style="width: 3%">
                       <a
                         href="/customer_ledger/<%=weekly_product_sales._id%>"
-                        class="btn btn-sm btn-success"
-                        >View Week</a
+                        class="btn btn-sm btn-success bg-gradient d-flex align-items-center justify-content-between"
+                        ><span class="material-symbols-outlined me-1">
+                          pageview</span
+                        ><span>View</span></a
                       >
                     </td>
                   </tr>

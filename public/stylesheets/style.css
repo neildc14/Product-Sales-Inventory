@@ -48,6 +48,9 @@ header {
   padding: 2px 10px !important;
 }
 
+.z-index {
+  z-index: 100;
+}
 .arrow_animation {
   animation-name: rotation;
   animation-duration: 0.8s;
@@ -181,9 +184,11 @@ td {
   padding-right: 1rem !important;
 }
 
-.user_form {
-  position: relative;
-  top: 20vh !important;
+.user_logo {
+  height: 150px;
+}
+.user_form,
+.page_detail_links {
   max-width: 350px;
   margin: 0 auto;
 }

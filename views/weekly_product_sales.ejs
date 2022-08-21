@@ -9,7 +9,7 @@
       >
         <%-include('./partials/nav')%>
         <div class="container mt-5" style="position: relative !important">
-          <nav class="top_nav d-flex bg-gradient" id="weekly_product_top_nav">
+          <nav class="top_nav d-flex bg-gradient z-index" id="weekly_product_top_nav">
             <li class="my-0 text-white d-flex align-items-center">
               <a href="#products_container" class="text-white">Products</a>
               <span class="ms-1"> |</span>
@@ -93,14 +93,16 @@
                   <%if(String(customer.product_ordered) === String(product._id))
                   { quantity_arr.push(customer.quantity_ordered)%> <%}%> <%})%>
                   <%let sum = 0; quantity_arr.forEach(x => sum += Number(x))%>
-                  <td class="px-0 sum" data-ordercount="<%=sum%>"><%=sum%></td>
-                  <td class="px-0">
-                    <a href="<%=product.url%>" class="btn btn-sm btn-success"
-                      >View Product</a
+                  <td class="px-0 sum" style="width: auto" data-ordercount="<%=sum%>"><%=sum%></td>
+                  <td  style="width:3%">
+                    <a href="<%=product.url%>" class="btn btn-sm btn-success bg-gradient d-flex align-items-center justify-content-between"
+                      ><span class="material-symbols-outlined me-1">
+                        pageview</span
+                      ><span>View</span></a
                     >
                   </td>
 
-                  <td class="px-0 m-0">
+                  <td class="px-0 m-0"  style="width: 5%">
                     <button
                       type="submit"
                       class="btn btn-sm d-flex align-items-center"
@@ -112,7 +114,7 @@
                       </span>
                     </button>
                   </td>
-                  <td class="px-0 m-0">
+                  <td class="px-0 m-0"  style="width: 5%">
                     <button
                       type="submit"
                       class="btn btn-sm d-flex align-items-center"
@@ -316,9 +318,9 @@
                   <%miscellaneous.forEach((misc)=>{ %>
 
                   <tr>
-                    <td><%=misc.misc_name%></td>
-                    <td class="px-0 m-0"><%=misc.amount_formatted%></td>
-                    <td class="px-0 m-0">
+                    <td class="td_description" ><%=misc.misc_name%></td>
+                    <td class="px-0 m-0" style="width:auto"><%=misc.amount_formatted%></td>
+                    <td class="px-0 m-0" style="width:5%">
                       <button
                         type="submit"
                         class="btn btn-sm d-flex align-items-center"
@@ -330,7 +332,7 @@
                         </span>
                       </button>
                     </td>
-                    <td class="px-0 m-0">
+                    <td class="px-0 m-0" style="width:5%" >
                       <button
                         type="submit"
                         class="btn btn-sm d-flex align-items-center"
@@ -417,7 +419,7 @@
                         <form
                           name="expensesEditForm"
                           data-miscurl="<%=misc.url%>"
-                          data-miscid="<%=misc._id%>"
+                          data-miscid="<%=misc._id%>" 
                         >
                           <div class="modal-body">
                             <div class="form-group pb-2">

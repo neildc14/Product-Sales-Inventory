@@ -4,8 +4,11 @@
   <body>
     <main>
       <div class="container">
-        <div class="user_form border p-4">
-          <h2 class="mb-3">Login Account</h2>
+        <div class="text-center">
+          <img src="/images/logo.png" alt="" class="user_logo" />
+        </div>
+        <div class="user_form border p-3">
+          <h3 class="mb-3">Login Account</h3>
           <form action="/login" method="POST">
             <div class="form-group">
               <label for="username" class="form-label">Username</label>
@@ -36,6 +39,10 @@
             </div>
           </form>
         </div>
+        <section class="page_detail_links mt-2 text-center">
+          <a href="" style="font-size: 14px; margin-right: 0.5rem">About Us</a>
+          <a href="" style="font-size: 14px">Contacts</a>
+        </section>
       </div>
     </main>
     <%-include('./partials/scripts')%>
