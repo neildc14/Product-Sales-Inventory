@@ -25,7 +25,7 @@
               <span>Refresh</span>
             </button>
             <h5 class="bg-primary text-white p-1">
-              <span>Product: </span><%=product.product_name%>
+              <span>Product: </span><%=product.product_name.toUpperCase()%>
             </h5>
           </div>
 
@@ -56,9 +56,10 @@
             <!-- Button trigger modal -->
             <button
               type="button"
-              class="btn btn-primary btn-sm"
+              class="btn btn-primary btn-sm addCustomerBtn"
               data-bs-toggle="modal"
               data-bs-target="#customerModal"
+              data-productquantity="<%=product.quantity%>"
             >
               Add Customer
             </button>

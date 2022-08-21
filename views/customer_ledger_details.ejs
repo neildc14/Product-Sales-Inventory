@@ -39,7 +39,9 @@
                 <tbody>
                   <%customers.forEach((customer)=> {%>
                   <tr>
-                    <td class="td_description"><%=customer.customer_name%></td>
+                    <td class="td_description">
+                      <%=customer.customer_name.toUpperCase()%>
+                    </td>
                     <td style="width: 3%">
                       <a
                         href="<%=customer.url%>"

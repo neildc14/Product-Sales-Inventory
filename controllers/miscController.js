@@ -16,6 +16,7 @@ exports.add_misc_get = function (req, res, next) {
         weekly_product_sales: results[0],
         errors: null,
         misc_reset: undefined,
+        user: req.user.username,
       });
     });
 };
@@ -34,6 +35,7 @@ exports.add_misc_post = [
         weekly_product_sales: results[0],
         errors: errors.array(),
         misc_reset: req.body,
+        user: req.user.username,
       });
       console.log(errors.array());
       return;

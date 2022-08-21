@@ -44,6 +44,14 @@ header {
   box-shadow: none !important;
 }
 
+.user_panel img {
+  height: 2.5rem;
+}
+
+.user_profile {
+  text-transform: capitalize;
+}
+
 .refresh_btn {
   padding: 2px 10px !important;
 }

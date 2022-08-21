@@ -19,6 +19,7 @@ exports.add_customer_post = [
         title: "Product Details",
         errors: errors.array(),
         customer_reset: req.body,
+        user: req.user.username,
       });
       console.log(errors.array());
       return;
@@ -59,6 +60,7 @@ exports.customer_details = function (req, res, next) {
           title: "Customer Details",
           customer: customer,
           product: product,
+          user: req.user.username,
         });
       });
   });
@@ -80,6 +82,7 @@ exports.customer_ledger = function (req, res, next) {
       res.render("customer_ledger", {
         title: "Customer Ledger",
         all_weekly_product_sales: results,
+        user: req.user.username,
       });
     });
 };

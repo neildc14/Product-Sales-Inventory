@@ -59,6 +59,7 @@ exports.index_get = function (req, res, next) {
         TotalSales: TotalSales,
         TotalCapital: TotalCapital,
         TotalRevenue: TotalRevenue,
+        user: req.user.username,
       });
     })
     .catch((err) => {
@@ -79,6 +80,7 @@ exports.add_product_post = [
       res.render("weekly_product_sales", {
         title: "Add Product",
         product_reset: req.body,
+        user: req.user.username,
         errors: errors.array(),
       });
       console.log(errors.array());
@@ -90,6 +92,7 @@ exports.add_product_post = [
         quantity: req.body.quantity,
         original_price: req.body.original_price,
         selling_price: req.body.selling_price,
+        user: req.user.username,
       });
       console.log(new_product);
       new_product.save((err) => {
@@ -120,6 +123,7 @@ exports.product_details = function (req, res, next) {
           customers: customers,
           errors: null,
           customer_reset: undefined,
+          user: req.user.username,
         });
       });
   });
@@ -140,6 +144,7 @@ exports.sales_history_add_product_post = [
         errors: errors.array(),
         product: req.body,
         customer_reset: req.body,
+        user: req.user.username,
       });
       console.log(errors.array());
       return;

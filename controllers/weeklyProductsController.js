@@ -9,6 +9,7 @@ exports.add_weekly_product_sales_get = function (req, res, next) {
   res.render("add_weekly_products_sales", {
     title: "Add Weekly Product",
     errors: null,
+    user: req.user.username,
   });
 };
 
@@ -22,6 +23,7 @@ exports.add_weekly_product_sales_post = [
         title: "Add Weekly Product",
         weekly_products_selling: req.body,
         errors: errors.array(),
+        user: req.user.username,
       });
       return;
     } else {
@@ -135,6 +137,7 @@ exports.weekly_products = function (req, res, next) {
             weekly_total_income: WeeklyTotalIncome,
             product_reset: undefined,
             errors: null,
+            user: req.user.username,
           });
         })
         .catch((err) => {
@@ -159,6 +162,7 @@ exports.sales_history = function (req, res, next) {
       res.render("sales_history", {
         title: "Sales History",
         all_weekly_product_sales: results,
+        user: req.user.username,
       });
     });
 };
@@ -262,6 +266,7 @@ exports.weekly_products_details = function (req, res, next) {
             weekly_total_income: WeeklyTotalIncome,
             product_reset: undefined,
             errors: null,
+            user: req.user.username,
           });
         })
         .catch((err) => {
