@@ -137,10 +137,21 @@ exports.product_details = function (req, res, next) {
           return next(err);
         }
         console.log(customers);
+        const quantityArray = [];
+        customers.forEach((customer) => {
+          quantityArray.push(customer.quantity_ordered);
+        });
+
+        let TotalOrders = 0;
+        quantityArray.forEach((quantity) => {
+          TotalOrders += quantity;
+        });
+        console.log(TotalOrders);
         res.render("product_details", {
           title: "Product Details",
           product: product,
           customers: customers,
+          total_orders: TotalOrders,
           errors: null,
           customer_reset: undefined,
           user: req.user.username,

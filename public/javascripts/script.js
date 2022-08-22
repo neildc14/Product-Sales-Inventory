@@ -52,3 +52,33 @@ if (registerForm) {
     });
   }
 }
+
+let limit_orders = document.querySelector(".limit_orders");
+if (limit_orders) {
+  let addCustomerForm = document.querySelector('[name="addCustomerForm"]');
+  let addBtn = document.querySelector(".addCustomerBtn");
+  let product_quantity = limit_orders.dataset.prodqty;
+  let total_orders = limit_orders.dataset.totalorders;
+  let quantity_ordered = addCustomerForm["quantity_ordered"];
+  let available_supply = Number(product_quantity) - Number(total_orders);
+
+  function disableAddBtn() {
+    if (
+      Number(total_orders) === Number(available_supply) ||
+      Number(available_supply) == 0
+    ) {
+      addBtn.setAttribute("disabled", "disabled");
+    }
+  }
+  disableAddBtn();
+
+  function limitQuantity() {
+    if (Number(quantity_ordered.value) > Number(product_quantity)) {
+      quantity_ordered.classList.add("is-invalid");
+
+      return false;
+    } else {
+      return totalPurchasedValue();
+    }
+  }
+}

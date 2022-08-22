@@ -29,12 +29,20 @@
             </h5>
           </div>
 
-          <section>
+          <section
+            class="limit_orders"
+            data-prodqty="<%=product.quantity%>"
+            data-totalorders="<%=total_orders%>"
+          >
             <table class="table border">
               <tbody>
                 <tr>
                   <th scope="row" class="td_description">Quantity</th>
                   <td><%=product.quantity%></td>
+                </tr>
+                <tr>
+                  <th scope="row" class="td_description">Stocks</th>
+                  <td><%=Number(product.quantity)-Number(total_orders)%></td>
                 </tr>
                 <tr>
                   <th scope="row" class="td_description">Original Price</th>
@@ -59,10 +67,18 @@
               class="btn btn-primary btn-sm addCustomerBtn"
               data-bs-toggle="modal"
               data-bs-target="#customerModal"
-              data-productquantity="<%=product.quantity%>"
             >
               Add Customer
             </button>
+            <%if(Number(total_orders)=== Number(product.quantity)){%>
+            <div
+              class="alert alert-warning d-flex align-items-center mt-2"
+              role="alert"
+            >
+              <span class="material-symbols-outlined me-2"> report </span
+              ><span>This product already sold out.</span>
+            </div>
+            <%}%>
             <hr />
             <%if(customers.length <= 0){%>
             <div
@@ -74,7 +90,7 @@
             </div>
 
             <%} else{%>
-            <table class="table">
+            <table class="table" class="customer_table">
               <thead>
                 <tr>
                   <th scope="col" class="td_description">Name</th>
@@ -128,7 +144,8 @@
                   <form
                     action=""
                     method="POST"
-                    onsubmit="totalPurchasedValue()"
+                    onsubmit="return limitQuantity()"
+                    name="addCustomerForm"
                   >
                     <div class="modal-body">
                       <div class="form-group pb-2">
@@ -184,6 +201,13 @@
                           autocomplete="off"
                           value="<%=customer_reset !== undefined ?  customer_reset.quantity_ordered : ''%>"
                         />
+                        <div
+                          id="validationServerUsernameFeedback"
+                          class="invalid-feedback"
+                        >
+                          Available:
+                          <%=Number(product.quantity)-Number(total_orders)%>
+                        </div>
                       </div>
                       <div class="form-group pb-2">
                         <input
