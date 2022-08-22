@@ -62,18 +62,24 @@ if (limit_orders) {
   let quantity_ordered = addCustomerForm["quantity_ordered"];
   let available_supply = Number(product_quantity) - Number(total_orders);
 
-  function disableAddBtn() {
-    if (
-      Number(total_orders) === Number(available_supply) ||
-      Number(available_supply) == 0
-    ) {
-      addBtn.setAttribute("disabled", "disabled");
+  if (product_quantity !== "") {
+    console.log(available_supply);
+    function disableAddBtn() {
+      if (
+        Number(total_orders) === Number(available_supply) ||
+        Number(available_supply) === 0
+      ) {
+        addBtn.setAttribute("disabled", "disabled");
+      }
     }
+    disableAddBtn();
   }
-  disableAddBtn();
 
   function limitQuantity() {
-    if (Number(quantity_ordered.value) > Number(product_quantity)) {
+    if (
+      Number(quantity_ordered.value) > Number(available_supply) &&
+      product_quantity !== ""
+    ) {
       quantity_ordered.classList.add("is-invalid");
       return false;
     } else {

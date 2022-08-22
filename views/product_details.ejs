@@ -42,7 +42,10 @@
                 </tr>
                 <tr>
                   <th scope="row" class="td_description">Stocks</th>
-                  <td><%=Number(product.quantity)-Number(total_orders)%></td>
+                  <td>
+                    <%=product.quantity === "" || product.quantity === null ? ""
+                    : Number(product.quantity)-Number(total_orders)%>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row" class="td_description">Original Price</th>
@@ -70,7 +73,8 @@
             >
               Add Customer
             </button>
-            <%if(Number(total_orders)=== Number(product.quantity)){%>
+            <%if(product.quantity == "" && Number(total_orders)===
+            Number(product.quantity)){ %>
             <div
               class="alert alert-warning d-flex align-items-center mt-2"
               role="alert"
