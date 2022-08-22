@@ -86,7 +86,7 @@ function editWeekSales() {
 
         let url = week.dataset.salesweekurl;
         let redirect = "/sales_history";
-        console.log(url);
+
         FetchToEdit(url, weeklySalesData, redirect);
       });
     });

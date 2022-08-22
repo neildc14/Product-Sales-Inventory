@@ -27,6 +27,10 @@ router.delete(
 );
 router.put("/weekly_products/:id", productController.product_put);
 
+//add products on dashboard
+router.get("/add_product", productController.add_product_get);
+router.post("/add_product", productController.add_product_post);
+
 //add miscellaneous
 router.get("/weekly_products/add_expenses", miscController.add_misc_get);
 router.post("/weekly_products/add_expenses", miscController.add_misc_post);

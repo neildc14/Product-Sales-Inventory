@@ -103,6 +103,7 @@ exports.customer_ledger_details = function (req, res, next) {
       res.render("customer_ledger_details", {
         title: "Customer Lists",
         customers: customers,
+        user: req.user.username,
       });
     });
   });

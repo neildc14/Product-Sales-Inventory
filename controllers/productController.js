@@ -1,4 +1,5 @@
 var { validationResult, body } = require("express-validator");
+var WeeklyProducts = require("../models/WeeklyProducts");
 var Product = require("../models/Product");
 var Customer = require("../models/Customer");
 var Miscellaneous = require("../models/Miscellaneous");
@@ -64,6 +65,25 @@ exports.index_get = function (req, res, next) {
     })
     .catch((err) => {
       return next(err);
+    });
+};
+
+exports.add_product_get = function (req, res, next) {
+  WeeklyProducts.find()
+    .sort({ createdAt: "desc" })
+    .limit(1)
+    .exec(function (err, results) {
+      if (err) {
+        return next(err);
+      }
+
+      res.render("add_product", {
+        title: "Add Product",
+        weekly_product_sales: results[0],
+        errors: null,
+        product_reset: undefined,
+        user: req.user.username,
+      });
     });
 };
 
