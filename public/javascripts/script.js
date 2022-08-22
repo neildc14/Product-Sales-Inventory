@@ -75,10 +75,17 @@ if (limit_orders) {
   function limitQuantity() {
     if (Number(quantity_ordered.value) > Number(product_quantity)) {
       quantity_ordered.classList.add("is-invalid");
-
       return false;
     } else {
       return totalPurchasedValue();
     }
+  }
+
+  if (quantity_ordered) {
+    quantity_ordered.addEventListener("input", () => {
+      if (quantity_ordered.classList.contains("is-invalid")) {
+        quantity_ordered.classList.remove("is-invalid");
+      }
+    });
   }
 }
