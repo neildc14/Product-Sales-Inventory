@@ -38,13 +38,17 @@
               <tbody>
                 <tr>
                   <th scope="row" class="td_description">Quantity</th>
-                  <td><%=product.quantity%></td>
+                  <td>
+                    <%=product.quantity === null ? String('Not Limited') :
+                    product.quantity%>
+                  </td>
                 </tr>
                 <tr>
                   <th scope="row" class="td_description">Stocks</th>
                   <td>
-                    <%=product.quantity === "" || product.quantity === null ? ""
-                    : Number(product.quantity)-Number(total_orders)%>
+                    <%=product.quantity === "" || product.quantity === null ?
+                    String('Not Limited') :
+                    Number(product.quantity)-Number(total_orders)%>
                   </td>
                 </tr>
                 <tr>
@@ -73,7 +77,7 @@
             >
               Add Customer
             </button>
-            <%if(product.quantity == "" && Number(total_orders)===
+            <%if(product.quantity !== null && Number(total_orders)===
             Number(product.quantity)){ %>
             <div
               class="alert alert-warning d-flex align-items-center mt-2"

@@ -6,6 +6,7 @@ var logger = require("morgan");
 var mongoose = require("mongoose");
 var session = require("express-session");
 var MongoStore = require("connect-mongo");
+var compression = require("compression");
 
 //routers
 var usersRouter = require("./routes/users");
@@ -42,6 +43,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(flash());
+app.use(compression());
 
 //authentication middleware
 passport.use(

@@ -66,7 +66,7 @@ if (limit_orders) {
     console.log(available_supply);
     function disableAddBtn() {
       if (
-        Number(total_orders) === Number(available_supply) ||
+        Number(total_orders) === Number(product_quantity) ||
         Number(available_supply) === 0
       ) {
         addBtn.setAttribute("disabled", "disabled");
